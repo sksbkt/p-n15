@@ -1,5 +1,6 @@
+import ThemeProviderWrapper from "@/provdiers/themeProvider";
 import React from "react";
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
-  return children;
+  return <ThemeProviderWrapper>{children}</ThemeProviderWrapper>;
 };

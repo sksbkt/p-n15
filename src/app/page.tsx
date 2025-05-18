@@ -1,5 +1,3 @@
-import { Typography } from "@mui/material";
-
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -9,7 +7,7 @@ export default async function Home() {
 
   return (
     <main className="flex justify-center">
-      <Typography variant="h2">Portfolio page</Typography>
+      <h3>HOME</h3>
     </main>
   );
 }

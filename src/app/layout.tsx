@@ -28,10 +28,14 @@ export default function RootLayout({
 }>) {
   return (
     // context provider
-    <html lang="en">
+    <html
+      lang="en"
+      suppressHydrationWarning
+    >
       <body
-      // className={`${geistSans.variable} ${geistMono.variable} antialiased flex items-center justify-center`}
-      // className="flex justify-center items-center bg-yellow-300"
+        suppressHydrationWarning
+        // className={`${geistSans.variable} ${geistMono.variable} antialiased flex items-center justify-center`}
+        // className="flex justify-center items-center bg-yellow-300"
       >
         <AppRouterCacheProvider>
           <AppProvider>
