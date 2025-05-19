@@ -16,7 +16,6 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const [mounted, setMounted] = React.useState(false);
   const mode = useThemeMode();
-  const { mode: scmode, setMode } = useColorScheme();
   React.useEffect(() => {
     setMounted(true);
   }, []);
@@ -32,12 +31,13 @@ const NavBar = () => {
         <Toolbar disableGutters>
           <CodeIcon />
           <Button
+            sx={{ color: "white" }}
             onClick={() => {
               dispatch(toggleThemeMode());
-              setMode(scmode === "dark" ? "light" : "dark");
             }}
+            disableElevation
           >
-            {mode.toLocaleUpperCase()}
+            {mode.toLocaleUpperCase()} MODE
           </Button>
         </Toolbar>
       </Container>

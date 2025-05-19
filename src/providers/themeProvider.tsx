@@ -11,17 +11,16 @@ import {
   ThemeProvider,
   useColorScheme,
 } from "@mui/material";
+import { useMemo } from "react";
 // import { useEffect } from "react";
 import { Provider } from "react-redux";
 
 const ThemeContent = ({ children }: { children: React.ReactNode }) => {
-  const mode = useThemeMode();
   const { setColorScheme } = useColorScheme();
+  const mode = useThemeMode();
+  const { setMode } = useColorScheme();
 
-  // useEffect(() => {
-  //   setColorScheme(mode);
-  //   console.log(theme);
-  // }, [mode, setColorScheme]);
+  useMemo(() => setMode(mode), [mode]);
 
   return (
     <ThemeProvider theme={theme}>

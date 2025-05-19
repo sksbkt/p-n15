@@ -27,8 +27,8 @@ const theme = createTheme({
     colorSchemeSelector: "class",
   },
   colorSchemes: {
-    light: true,
-    dark: true,
+    light: getDesignToken("light"),
+    dark: getDesignToken("dark"),
   },
 });
 // const theme = (mode: PaletteMode) => createTheme(getDesignToken(mode));
