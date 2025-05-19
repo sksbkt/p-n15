@@ -23,9 +23,10 @@ export const getDesignToken = (mode: PaletteMode): ColorSystemOptions => {
   return {
     palette: {
       ...commonPalette,
-      mode,
+      // mode,
       ...(mode === "light"
         ? {
+            mode: "light",
             primary: { main: "#1976d2" }, // Example light primary
             secondary: { main: "#9c27b0" }, // Example light secondary
             background: {
@@ -39,6 +40,7 @@ export const getDesignToken = (mode: PaletteMode): ColorSystemOptions => {
             // ... other light mode specific colors
           }
         : {
+            mode: "dark",
             primary: { main: "#90caf9" }, // Example dark primary
             secondary: { main: "#ce93d8" }, // Example dark secondary
             background: {

@@ -1,13 +1,31 @@
 "use client";
-import { AppBar, Button, Container, Toolbar, useTheme } from "@mui/material";
-import React from "react";
+import {
+  AppBar,
+  Button,
+  Container,
+  Toolbar,
+  useColorScheme,
+} from "@mui/material";
+import React, { useEffect } from "react";
 import CodeIcon from "@mui/icons-material/Code";
 import { useDispatch } from "react-redux";
 import { toggleThemeMode } from "@/store/themeSlice";
+import { useThemeMode } from "@/hooks/useThemeHook";
 
 const NavBar = () => {
-  const theme = useTheme();
   const dispatch = useDispatch();
+  const [mounted, setMounted] = React.useState(false);
+  const mode = useThemeMode();
+  const { mode: scmode, setMode } = useColorScheme();
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    console.log(mode);
+  }, [mode]);
+  if (!mounted) return null;
+
   return (
     <AppBar position="sticky">
       <Container maxWidth="xl">
@@ -16,10 +34,10 @@ const NavBar = () => {
           <Button
             onClick={() => {
               dispatch(toggleThemeMode());
+              setMode(scmode === "dark" ? "light" : "dark");
             }}
-            sx={{ color: theme.palette.primary.main }}
           >
-            MODE
+            {mode.toLocaleUpperCase()}
           </Button>
         </Toolbar>
       </Container>
