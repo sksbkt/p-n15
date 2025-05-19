@@ -37,6 +37,7 @@ export const getDesignToken = (mode: PaletteMode): ColorSystemOptions => {
               primary: "rgba(0, 0, 0, 0.87)",
               secondary: "rgba(0, 0, 0, 0.6)",
             },
+
             // ... other light mode specific colors
           }
         : {
