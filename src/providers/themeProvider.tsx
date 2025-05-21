@@ -4,30 +4,22 @@
 import { useThemeMode } from "@/hooks/useThemeHook";
 import { store } from "@/store";
 import theme from "@/theme";
-// import theme, { useAppTheme } from "@/theme";
 import {
   CssBaseline,
   InitColorSchemeScript,
   ThemeProvider,
   useColorScheme,
 } from "@mui/material";
-import { useMemo } from "react";
-// import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { Provider } from "react-redux";
 
 const ThemeContent = ({ children }: { children: React.ReactNode }) => {
-  const { setColorScheme } = useColorScheme();
   const mode = useThemeMode();
   const { setMode } = useColorScheme();
 
-  useMemo(() => setMode(mode), [mode]);
+  useEffect(() => setMode(mode), [mode]);
 
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline enableColorScheme />
-      {children}
-    </ThemeProvider>
-  );
+  return children;
 };
 
 const ThemeProviderWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -37,7 +29,10 @@ const ThemeProviderWrapper = ({ children }: { children: React.ReactNode }) => {
         attribute="class"
         defaultMode="system"
       />
-      <ThemeContent>{children}</ThemeContent>
+      <ThemeProvider theme={theme}>
+        <CssBaseline enableColorScheme />
+        <ThemeContent>{children}</ThemeContent>
+      </ThemeProvider>
     </Provider>
   );
 };
