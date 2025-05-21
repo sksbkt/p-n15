@@ -1,7 +1,3 @@
-// import { getPalette } from "@/theme/palettes";
-// import { createTheme, PaletteMode } from "@mui/material";
-// import { useMemo } from "react";
-
 import { getDesignToken } from "@/theme/palettes";
 import {
   createTheme,
@@ -15,13 +11,6 @@ export const useAppTheme = (mode: PaletteMode) => {
   return theme;
 };
 
-// const theme = extendTheme({
-//   colorSchemes: {
-//     light: getDesignToken("light"),
-//     dark: getDesignToken("dark"),
-//   },
-//   components: { MuiButton: { defaultProps: { disableElevation: true } } },
-// });
 const theme = createTheme({
   cssVariables: {
     colorSchemeSelector: "class",
