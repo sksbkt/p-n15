@@ -3,7 +3,6 @@
 import { useThemeMode } from "@/hooks/useThemeHook";
 import { useWindow } from "@/hooks/useWindow";
 import { store } from "@/store";
-import { setIsScrolled } from "@/store/widowSlice";
 import theme from "@/theme";
 import { Direction } from "@/types";
 import {
@@ -14,7 +13,7 @@ import {
   useColorScheme,
 } from "@mui/material";
 import { useEffect } from "react";
-import { Provider, useDispatch } from "react-redux";
+import { Provider } from "react-redux";
 
 const ThemeContent = ({ children }: { children: React.ReactNode }) => {
   const { direction, mode } = useThemeMode();
@@ -31,17 +30,18 @@ const ThemeContent = ({ children }: { children: React.ReactNode }) => {
     setMode(mode);
     handleDocumentDirection(direction);
   }, [mode, direction, setMode]);
-  const dispatch = useDispatch();
-  const { isScrolled } = useWindow();
+  const { isScrolled, setIsScrolled } = useWindow();
   useEffect(() => {
     const handleScroll = () => {
       // Check if the scroll position is greater than a threshold (e.g., 50 pixels)
       if (window.scrollY > 50) {
-        dispatch(setIsScrolled(true));
+        // dispatch(setIsScrolled(true));
+        setIsScrolled(true);
 
         // setIsScrolled(true);
       } else {
-        dispatch(setIsScrolled(false));
+        setIsScrolled(false);
+        // dispatch(setIsScrolled(false));
         // setIsScrolled(false);
       }
     };
@@ -53,7 +53,7 @@ const ThemeContent = ({ children }: { children: React.ReactNode }) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [dispatch]);
+  }, [setIsScrolled]);
   return (
     <>
       <Box sx={{ height: isScrolled ? "60px" : "90px" }} />

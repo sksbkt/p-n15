@@ -15,8 +15,7 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import CodeIcon from "@mui/icons-material/Code";
-import { useDispatch } from "react-redux";
-import { setThemeDirection, toggleThemeMode } from "@/store/themeSlice";
+// import { useDispatch } from "react-redux";
 import { useThemeMode } from "@/hooks/useThemeHook";
 
 import LightModeIcon from "@mui/icons-material/LightMode";
@@ -24,9 +23,9 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useWindow } from "@/hooks/useWindow";
 function NavBar() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [mounted, setMounted] = React.useState(false);
-  const { direction, mode } = useThemeMode();
+  const { setDirection, toggleThemeMode, direction, mode } = useThemeMode();
   const [language, setLanguage] = useState(direction === "ltr" ? "En" : "Fa");
   const theme = useTheme();
   React.useEffect(() => {
@@ -37,26 +36,6 @@ function NavBar() {
   // const [isScrolled, setIsScrolled] = useState(false);
   // State for the mobile menu anchor element
   const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
-
-  // Effect hook to add and remove scroll event listener
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     // Check if the scroll position is greater than a threshold (e.g., 50 pixels)
-  //     if (window.scrollY > 50) {
-  //       setIsScrolled(true);
-  //     } else {
-  //       setIsScrolled(false);
-  //     }
-  //   };
-
-  //   // Add the scroll event listener when the component mounts
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   // Clean up the event listener when the component unmounts
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []); // Empty dependency array ensures this runs only once on mount
 
   const { isScrolled } = useWindow();
 
@@ -80,10 +59,10 @@ function NavBar() {
     switch (e.target.value) {
       case "En":
         setLanguage("En");
-        dispatch(setThemeDirection("ltr"));
+        setDirection("ltr");
         break;
       case "Fa":
-        dispatch(setThemeDirection("rtl"));
+        setDirection("rtl");
         setLanguage("Fa");
         break;
 
@@ -230,7 +209,7 @@ function NavBar() {
             <Button
               sx={{ color: "white" }}
               onClick={() => {
-                dispatch(toggleThemeMode());
+                toggleThemeMode();
               }}
               disableElevation
             >
@@ -285,7 +264,8 @@ function NavBar() {
           <Button
             sx={{ color: "white" }}
             onClick={() => {
-              dispatch(toggleThemeMode());
+              // dispatch(toggleThemeMode());
+              toggleThemeMode();
             }}
             disableElevation
           >
