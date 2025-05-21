@@ -10,6 +10,10 @@ export const store = configureStore({
   preloadedState: {
     theme: {
       mode: readFromLocalStorage({ value: "theme-mode", defValue: "dark" }),
+      direction: readFromLocalStorage({
+        value: "theme-mode",
+        defValue: "dark",
+      }),
     },
   },
 });
@@ -17,6 +21,10 @@ store.subscribe(() => {
   writeToLocalStorage({
     key: "theme-mode",
     value: store.getState().theme.mode,
+  });
+  writeToLocalStorage({
+    key: "theme-direction",
+    value: store.getState().theme.direction,
   });
 });
 

@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import { Provider } from "react-redux";
 
 const ThemeContent = ({ children }: { children: React.ReactNode }) => {
-  const mode = useThemeMode();
+  const { mode } = useThemeMode();
   const { setMode } = useColorScheme();
 
   useEffect(() => setMode(mode), [mode, setMode]);

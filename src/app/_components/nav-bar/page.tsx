@@ -1,11 +1,5 @@
 "use client";
-import {
-  AppBar,
-  Button,
-  Container,
-  Toolbar,
-  useColorScheme,
-} from "@mui/material";
+import { AppBar, Button, Container, Toolbar } from "@mui/material";
 import React, { useEffect } from "react";
 import CodeIcon from "@mui/icons-material/Code";
 import { useDispatch } from "react-redux";
@@ -15,7 +9,7 @@ import { useThemeMode } from "@/hooks/useThemeHook";
 const NavBar = () => {
   const dispatch = useDispatch();
   const [mounted, setMounted] = React.useState(false);
-  const mode = useThemeMode();
+  const { mode } = useThemeMode();
   React.useEffect(() => {
     setMounted(true);
   }, []);
