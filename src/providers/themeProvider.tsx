@@ -11,21 +11,22 @@ import {
   ThemeProvider,
   useColorScheme,
 } from "@mui/material";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 // import { useEffect } from "react";
 import { Provider } from "react-redux";
 
-const ThemeContent = ({ children }: { children: React.ReactNode }) => {
-  const { setColorScheme } = useColorScheme();
+const ThemeBaseContent = ({ children }: { children: React.ReactNode }) => {
   const mode = useThemeMode();
   const { setMode } = useColorScheme();
 
-  useMemo(() => setMode(mode), [mode]);
-
+  useEffect(() => setMode(mode), [mode, setMode]);
+  return children;
+};
+const ThemeContent = ({ children }: { children: React.ReactNode }) => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme />
-      {children}
+      <ThemeBaseContent>{children}</ThemeBaseContent>
     </ThemeProvider>
   );
 };
