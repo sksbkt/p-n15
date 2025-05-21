@@ -1,12 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import themeReducer from "./themeSlice";
+import windowReducer from "./widowSlice";
 import {
   readFromLocalStorage,
   writeToLocalStorage,
 } from "@/store/utils/localStorage";
 
 export const store = configureStore({
-  reducer: { theme: themeReducer },
+  reducer: { theme: themeReducer, widowHelper: windowReducer },
   preloadedState: {
     theme: {
       mode: readFromLocalStorage({ value: "theme-mode", defValue: "dark" }),

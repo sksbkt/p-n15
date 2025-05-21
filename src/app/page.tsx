@@ -1,3 +1,5 @@
+import TestPage from "@/app/_components/Test";
+
 function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -7,7 +9,7 @@ export default async function Home() {
 
   return (
     <main className="flex justify-center">
-      <h3>HOME</h3>
+      <TestPage />
     </main>
   );
 }

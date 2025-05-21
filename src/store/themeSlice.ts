@@ -1,3 +1,4 @@
+import { Direction } from "@/types";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = { mode: "dark", direction: "ltr" };
@@ -11,7 +12,7 @@ const themeSlice = createSlice({
     toggleThemeMode: (state) => {
       state.mode = state.mode === "light" ? "dark" : "light";
     },
-    setThemeDirection: (state, action) => {
+    setThemeDirection: (state, action: { payload: Direction }) => {
       state.direction = action.payload;
     },
     toggleThemeDirection: (state) => {
