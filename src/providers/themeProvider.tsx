@@ -3,6 +3,7 @@
 import { useThemeMode } from "@/hooks/useThemeHook";
 import { store } from "@/store";
 import theme from "@/theme";
+import { Direction } from "@/types";
 import {
   CssBaseline,
   InitColorSchemeScript,
@@ -13,10 +14,17 @@ import { useEffect } from "react";
 import { Provider } from "react-redux";
 
 const ThemeContent = ({ children }: { children: React.ReactNode }) => {
-  const { mode } = useThemeMode();
+  const { direction, mode } = useThemeMode();
   const { setMode } = useColorScheme();
 
-  useEffect(() => setMode(mode), [mode, setMode]);
+  const handleDocumentDirection = (direction: Direction) => {
+    document.documentElement.setAttribute("dir", direction);
+  };
+
+  useEffect(() => {
+    setMode(mode);
+    handleDocumentDirection(direction);
+  }, [mode, direction, setMode]);
 
   return children;
 };

@@ -11,8 +11,8 @@ export const store = configureStore({
     theme: {
       mode: readFromLocalStorage({ value: "theme-mode", defValue: "dark" }),
       direction: readFromLocalStorage({
-        value: "theme-mode",
-        defValue: "dark",
+        value: "theme-direction",
+        defValue: "ltr",
       }),
     },
   },

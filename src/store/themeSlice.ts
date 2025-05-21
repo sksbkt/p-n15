@@ -12,10 +12,12 @@ const themeSlice = createSlice({
       state.mode = state.mode === "light" ? "dark" : "light";
     },
     setThemeDirection: (state, action) => {
-      state.mode = action.payload;
+      state.direction = action.payload;
     },
     toggleThemeDirection: (state) => {
-      state.mode = state.mode === "light" ? "dark" : "light";
+      console.log(state);
+
+      state.direction = state.direction === "ltr" ? "rtl" : "ltr";
     },
   },
 });
