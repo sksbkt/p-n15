@@ -12,9 +12,6 @@ import {
 // };
 
 const theme = createTheme({
-  cssVariables: {
-    colorSchemeSelector: "class",
-  },
   colorSchemes: {
     light: getDesignToken("light"),
     dark: getDesignToken("dark"),

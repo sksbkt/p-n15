@@ -22,6 +22,7 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useWindow } from "@/hooks/useWindow";
+import { styled } from "@mui/material/styles";
 function NavBar() {
   // const dispatch = useDispatch();
   const [mounted, setMounted] = React.useState(false);
@@ -70,7 +71,50 @@ function NavBar() {
         break;
     }
   };
-
+  type ExtraProps = {
+    component: React.ElementType;
+    href: string;
+  };
+  const BrandTypography = styled(Typography)<ExtraProps>(({ theme }) => ({
+    fontFamily: "monospace",
+    fontWeight: 700,
+    letterSpacing: ".1rem",
+    color: "inherit",
+    textDecoration: "none",
+    fontSize: isScrolled ? "1.2rem" : "1.5rem",
+    transition: "font-size 0.3s ease-in-out",
+  }));
+  const MenuTypographyDesktop = styled(Typography)(({ theme }) => ({
+    color:
+      theme.palette.mode === "dark"
+        ? theme.palette.primary.main
+        : theme.palette.primary.main,
+    fontWeight: 600,
+    letterSpacing: "0.08em",
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    display: "block",
+    position: "relative",
+    cursor: "pointer",
+    "&::after": {
+      content: '""',
+      display: "block",
+      position: "absolute",
+      left: 0,
+      bottom: 0,
+      height: "2px",
+      width: 0,
+      background: theme.palette.primary.main,
+      borderRadius: "2px",
+      transition: "width 0.4s cubic-bezier(0.4,0,0.2,1)",
+      zIndex: 1,
+    },
+    "&:hover::after": {
+      width: "100%",
+    },
+  }));
   return (
     <>
       <AppBar
@@ -83,13 +127,11 @@ function NavBar() {
           // Calculate width to account for horizontal margins
           width: isScrolled ? "100%" : "calc(100% - 20px)",
           // Apply rounded corners conditionally
-          borderRadius: isScrolled ? "0px" : "20px",
-          // Conditional background color based on scroll state
-          backgroundColor: isScrolled
-            ? "rgba(25, 118, 210, 0.9)"
-            : theme.palette.primary.main,
+          borderRadius: isScrolled ? "0px" : "7px",
           // Ensure it's above other content
+          background: isScrolled ? "" : "transparent !important",
           zIndex: theme.zIndex.appBar + 1,
+          boxShadow: "none !important",
         }}
       >
         <Toolbar
@@ -107,28 +149,49 @@ function NavBar() {
           }}
         >
           {/* Logo or Site Title */}
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#"
+          <Box
             sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" }, // Hide on small screens, show on medium+
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".1rem",
-              color: "inherit",
-              textDecoration: "none",
-              fontSize: isScrolled ? "1.2rem" : "1.5rem", // Smaller font when scrolled
-              transition: "font-size 0.3s ease-in-out",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "flex-start",
+              flexGrow: 1,
+              [theme.breakpoints.up("md")]: {
+                display: "flex",
+              },
+              [theme.breakpoints.down("md")]: {
+                display: "none",
+              },
             }}
           >
-            MyBrand
-          </Typography>
+            <BrandTypography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/ss"
+              sx={{
+                [theme.breakpoints.down("md")]: {
+                  display: "none",
+                },
+                [theme.breakpoints.up("md")]: {
+                  display: "flex",
+                },
+              }}
+            >
+              Dev
+            </BrandTypography>
+            <Typography
+              sx={{
+                color: [theme.palette.primary.main],
+                fontSize: 24,
+                fontWeight: 800,
+              }}
+            >
+              /
+            </Typography>
+          </Box>
 
           {/* Mobile Menu Icon (Hamburger) */}
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -170,37 +233,52 @@ function NavBar() {
           </Box>
 
           {/* Mobile Logo/Title */}
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="#"
+          <Box
             sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" }, // Show on small screens, hide on medium+
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "flex-start",
               flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".1rem",
-              color: "inherit",
-              textDecoration: "none",
-              fontSize: isScrolled ? "1.2rem" : "1.5rem", // Smaller font when scrolled
-              transition: "font-size 0.3s ease-in-out",
+              [theme.breakpoints.down("md")]: {
+                display: "flex",
+              },
+              [theme.breakpoints.up("md")]: {
+                display: "none",
+              },
             }}
           >
-            MyBrand
-          </Typography>
+            <BrandTypography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/ss"
+            >
+              Dev
+            </BrandTypography>
+            <Typography
+              sx={{
+                color: [theme.palette.primary.main],
+                fontSize: 24,
+                fontWeight: 800,
+              }}
+            >
+              /
+            </Typography>
+          </Box>
 
           {/* Desktop Navigation Links */}
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {navItems.map((item) => (
-              <Button
-                key={item}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block", mx: 1 }}
-              >
-                {item}
-              </Button>
+              // <Button
+              //   key={item}
+              //   onClick={handleCloseNavMenu}
+              //   sx={{ my: 2, color: "white", display: "block", mx: 1 }}
+              // >
+              //   {item}
+              // </Button>
+              // TODO: menu
+              <MenuTypographyDesktop key={item}>{item}</MenuTypographyDesktop>
             ))}
           </Box>
 

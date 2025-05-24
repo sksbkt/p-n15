@@ -1,58 +1,206 @@
-import { ColorSystemOptions, PaletteMode } from "@mui/material";
-const commonPalette = {
-  primary: {
-    main: "#1976d2",
-    light: "#63a4ff",
-    dark: "#004ba0",
-    contrastText: "#fff",
+"use client";
+import { PaletteMode } from "@mui/material";
+
+// Define common typography settings
+const typography = {
+  fontFamily: "Inter, sans-serif",
+  h1: {
+    fontWeight: 700,
+    fontSize: "3rem", // Example size
   },
-  secondary: {
-    main: "#9c27b0",
-    light: "#d05ce3",
-    dark: "#6a0080",
-    contrastText: "#fff",
+  h2: {
+    fontWeight: 600,
+    fontSize: "2.5rem",
+  },
+  h3: {
+    fontWeight: 600,
+    fontSize: "2rem",
+  },
+  h4: {
+    fontWeight: 500,
+    fontSize: "1.5rem",
+  },
+  body1: {
+    fontSize: "1rem",
+    lineHeight: 1.6,
+  },
+  body2: {
+    fontSize: "0.875rem",
+    lineHeight: 1.5,
+  },
+  button: {
+    textTransform: "none", // Keep button text as is, not all caps
+    fontWeight: 600,
   },
 };
-// export const getPalette = (mode: PaletteMode) => ({
-//   mode,
-//   ...commonPalette,
-//   ...(mode === "light" ? {} : {}),
-// });
 
-export const getDesignToken = (mode: PaletteMode): ColorSystemOptions => {
+// Define common component overrides
+const commonComponents = {
+  MuiButton: {
+    styleOverrides: {
+      root: {
+        borderRadius: 8, // Rounded corners for buttons
+      },
+    },
+  },
+  MuiPaper: {
+    styleOverrides: {
+      root: {
+        borderRadius: 8, // Rounded corners for cards/paper
+      },
+    },
+  },
+  MuiCard: {
+    styleOverrides: {
+      root: {
+        borderRadius: 8,
+      },
+    },
+  },
+  MuiLink: {
+    styleOverrides: {
+      root: {
+        textDecoration: "none",
+        "&:hover": {
+          textDecoration: "underline",
+        },
+      },
+    },
+  },
+};
+
+// Function to get the design tokens based on the mode
+export const getDesignToken = (mode: PaletteMode) => {
+  // Removed PaletteMode type for broader compatibility in this environment
   return {
     palette: {
-      ...commonPalette,
-      // mode,
+      mode,
       ...(mode === "light"
         ? {
-            mode: "light",
-            primary: { main: "#1976d2" }, // Example light primary
-            secondary: { main: "#9c27b0" }, // Example light secondary
+            cssVariables: {
+              colorSchemeSelector: "class",
+            },
+            primary: {
+              main: "#00BCD4", // Teal accent color
+              light: "#4DD0E1",
+              dark: "#0097A7",
+              contrastText: "#FFFFFF",
+            },
+            secondary: {
+              main: "#FFC107", // Amber for secondary actions/highlights
+              light: "#FFD54F",
+              dark: "#FFA000",
+              contrastText: "#212121",
+            },
+            error: {
+              main: "#EF5350",
+            },
+            warning: {
+              main: "#FF9800",
+            },
+            info: {
+              main: "#2196F3",
+            },
+            success: {
+              main: "#4CAF50",
+            },
             background: {
-              default: "#fff",
-              paper: "#fff",
+              default: "#F7FAFC", // Very light grey/off-white for main background
+              paper: "#FFFFFF", // White for cards/surfaces
             },
             text: {
-              primary: "rgba(0, 0, 0, 0.87)",
-              secondary: "rgba(0, 0, 0, 0.6)",
+              primary: "#2D3748", // Dark blue-grey text
+              secondary: "#4A5568", // Medium grey text for secondary info
+              disabled: "#A0AEC0",
             },
-
-            // ... other light mode specific colors
+            divider: "#E2E8F0", // Light grey for dividers
           }
         : {
-            mode: "dark",
-            primary: { main: "#90caf9" }, // Example dark primary
-            secondary: { main: "#ce93d8" }, // Example dark secondary
+            cssVariables: {
+              colorSchemeSelector: "class",
+            },
+            primary: {
+              main: "#00BCD4", // Teal accent color
+              light: "#4DD0E1",
+              dark: "#0097A7",
+              contrastText: "#FFFFFF",
+            },
+            secondary: {
+              main: "#FFC107", // Amber for secondary actions/highlights
+              light: "#FFD54F",
+              dark: "#FFA000",
+              contrastText: "#212121",
+            },
+            error: {
+              main: "#EF5350",
+            },
+            warning: {
+              main: "#FF9800",
+            },
+            info: {
+              main: "#2196F3",
+            },
+            success: {
+              main: "#4CAF50",
+            },
             background: {
-              default: "#121212",
-              paper: "#1e1e1e",
+              default: "#1A202C", // Very dark blue-grey for main background
+              paper: "#2D3748", // Slightly lighter dark blue-grey for cards/surfaces
             },
             text: {
-              primary: "#fff",
-              secondary: "rgba(255, 255, 255, 0.7)",
+              primary: "#FFFFFF", // White text
+              secondary: "#A0AEC0", // Light grey text for secondary info
+              disabled: "#6B7280",
             },
+            divider: "#4A5568", // Darker grey for dividers
           }),
+    },
+    typography: typography,
+    components: {
+      ...commonComponents,
+      // Mode-specific component overrides
+      MuiAppBar: {
+        styleOverrides: {
+          root: {
+            backgroundColor: mode === "light" ? "#FFFFFF" : "#2D3748",
+            color: mode === "light" ? "#2D3748" : "#FFFFFF",
+          },
+        },
+      },
+      MuiCard: {
+        styleOverrides: {
+          root: {
+            ...commonComponents.MuiCard.styleOverrides.root,
+            boxShadow:
+              mode === "light"
+                ? "0px 4px 10px rgba(0, 0, 0, 0.05)"
+                : "0px 4px 10px rgba(0, 0, 0, 0.3)",
+            border:
+              mode === "light"
+                ? "1px solid #E2E8F0"
+                : "1px solid rgba(255, 255, 255, 0.1)",
+          },
+        },
+      },
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            ...commonComponents.MuiPaper.styleOverrides.root,
+            boxShadow:
+              mode === "light"
+                ? "0px 4px 10px rgba(0, 0, 0, 0.05)"
+                : "0px 4px 10px rgba(0, 0, 0, 0.3)",
+          },
+        },
+      },
+      MuiLink: {
+        styleOverrides: {
+          root: {
+            ...commonComponents.MuiLink.styleOverrides.root,
+            color: "#00BCD4", // Accent color for links (same for both modes)
+          },
+        },
+      },
     },
   };
 };
