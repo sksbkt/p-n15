@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import {
   AppBar,
   Box,
   Button,
   Container,
+  Grid,
   IconButton,
   Menu,
   MenuItem,
@@ -117,263 +119,238 @@ function NavBar() {
   }));
   return (
     <>
-      <AppBar
-        position="fixed" // Keeps the AppBar fixed at the top
-        sx={{
-          // Conditional margin from the top of the window
-          mt: isScrolled ? "0px" : "10px",
-          // Conditional horizontal margin to remove space for rounded corners when scrolled
-          mx: isScrolled ? "0px" : "10px",
-          // Calculate width to account for horizontal margins
-          width: isScrolled ? "100%" : "calc(100% - 20px)",
-          // Apply rounded corners conditionally
-          borderRadius: isScrolled ? "0px" : "7px",
-          // Ensure it's above other content
-          background: isScrolled ? "" : "transparent !important",
-          zIndex: theme.zIndex.appBar + 1,
-          boxShadow: "none !important",
-        }}
+      <Grid
+        container
+        spacing={3}
       >
-        <Toolbar
+        <AppBar
+          position="fixed" // Keeps the AppBar fixed at the top
           sx={{
-            // Conditional padding for the toolbar to make it smaller on scroll
-            maxHeight: isScrolled ? "28px" : "64px", // Smaller height when scrolled
-            padding: isScrolled ? "0 16px" : "0 24px", // Smaller padding when scrolled
-            "@media (min-width:800px)": {
-              minHeight: isScrolled ? "48px" : "64px", // Consistent height for larger screens
-            },
-            // Center content within the toolbar
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
+            // Conditional margin from the top of the window
+            mt: isScrolled ? "0px" : "10px",
+            // Conditional horizontal margin to remove space for rounded corners when scrolled
+            mx: isScrolled ? "0px" : "10px",
+            // Calculate width to account for horizontal margins
+            width: isScrolled ? "100%" : "calc(100% - 20px)",
+            // Apply rounded corners conditionally
+            borderRadius: isScrolled ? "0px" : "7px",
+            // Ensure it's above other content
+            background: isScrolled ? "" : "transparent !important",
+            zIndex: theme.zIndex.appBar + 1,
+            boxShadow: "none !important",
           }}
         >
-          {/* Logo or Site Title */}
-          <Box
+          <Toolbar
             sx={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "flex-start",
-              flexGrow: 1,
-              [theme.breakpoints.up("md")]: {
-                display: "flex",
+              // Conditional padding for the toolbar to make it smaller on scroll
+              maxHeight: isScrolled ? "28px" : "64px", // Smaller height when scrolled
+              padding: isScrolled ? "0 16px" : "0 24px", // Smaller padding when scrolled
+              "@media (min-width:800px)": {
+                minHeight: isScrolled ? "48px" : "64px", // Consistent height for larger screens
               },
-              [theme.breakpoints.down("md")]: {
-                display: "none",
-              },
-            }}
-          >
-            <BrandTypography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/ss"
-              sx={{
-                [theme.breakpoints.down("md")]: {
-                  display: "none",
-                },
-                [theme.breakpoints.up("md")]: {
-                  display: "flex",
-                },
-              }}
-            >
-              Dev
-            </BrandTypography>
-            <Typography
-              sx={{
-                color: [theme.palette.primary.main],
-                fontSize: 24,
-                fontWeight: 800,
-              }}
-            >
-              /
-            </Typography>
-          </Box>
-
-          {/* Mobile Menu Icon (Hamburger) */}
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-              disableScrollLock={true}
-            >
-              {navItems.map((item) => (
-                <MenuItem
-                  key={item}
-                  onClick={handleCloseNavMenu}
-                >
-                  <Typography textAlign="center">{item}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-
-          {/* Mobile Logo/Title */}
-          <Box
-            sx={{
+              // Center content within the toolbar
               display: "flex",
-              flexDirection: "row",
+              justifyContent: "space-between",
               alignItems: "center",
-              justifyContent: "flex-start",
-              flexGrow: 1,
-              [theme.breakpoints.down("md")]: {
-                display: "flex",
-              },
-              [theme.breakpoints.up("md")]: {
-                display: "none",
-              },
             }}
           >
-            <BrandTypography
-              variant="h6"
-              noWrap
-              component="a"
-              href="/ss"
-            >
-              Dev
-            </BrandTypography>
-            <Typography
-              sx={{
-                color: [theme.palette.primary.main],
-                fontSize: 24,
-                fontWeight: 800,
-              }}
-            >
-              /
-            </Typography>
-          </Box>
-
-          {/* Desktop Navigation Links */}
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {navItems.map((item) => (
-              // <Button
-              //   key={item}
-              //   onClick={handleCloseNavMenu}
-              //   sx={{ my: 2, color: "white", display: "block", mx: 1 }}
-              // >
-              //   {item}
-              // </Button>
-              // TODO: menu
-              <MenuTypographyDesktop key={item}>{item}</MenuTypographyDesktop>
-            ))}
-          </Box>
-
-          {/* Right-aligned buttons (e.g., Login/Signup) */}
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Button
-              sx={{ color: "white" }}
-              onClick={() => {
-                toggleThemeMode();
-              }}
-              disableElevation
-            >
-              {mode === "dark" ? <DarkModeIcon /> : <LightModeIcon />}
-            </Button>
-            <Select
-              value={language}
-              onChange={languageChange}
-              sx={{
-                color: "white",
-                border: "none",
-                "& fieldset": { border: "none" },
-              }}
-            >
-              <MenuItem
-                key={"En"}
-                value={"En"}
+            {/* Logo or Site Title */}
+            <Grid size={{ xs: "auto", md: "grow" }}>
+              <Box
+                sx={{
+                  direction: "ltr",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "flex-start",
+                  flexGrow: 1,
+                  [theme.breakpoints.up("md")]: {
+                    display: "flex",
+                  },
+                  [theme.breakpoints.down("md")]: {
+                    display: "none",
+                  },
+                }}
               >
-                English
-              </MenuItem>
-              <MenuItem
-                key={"Fa"}
-                value={"Fa"}
+                <BrandTypography
+                  variant="h6"
+                  noWrap
+                  component="a"
+                  href="/ss"
+                  sx={{
+                    [theme.breakpoints.down("md")]: {
+                      display: "none",
+                    },
+                    [theme.breakpoints.up("md")]: {
+                      display: "flex",
+                    },
+                  }}
+                >
+                  Dev
+                </BrandTypography>
+                <Typography
+                  sx={{
+                    color: [theme.palette.primary.main],
+                    fontSize: 24,
+                    fontWeight: 800,
+                  }}
+                >
+                  /
+                </Typography>
+              </Box>
+              <Box sx={{ display: "flex", gap: 2 }}>
+                {/* Mobile Menu Icon (Hamburger) */}
+                <Box
+                  sx={{
+                    display: { xs: "flex", md: "none" },
+                  }}
+                >
+                  <IconButton
+                    size="large"
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    onClick={handleOpenNavMenu}
+                    color="inherit"
+                  >
+                    <MenuIcon />
+                  </IconButton>
+                  <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorElNav}
+                    anchorOrigin={{
+                      vertical: "bottom",
+                      horizontal: "left",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "left",
+                    }}
+                    open={Boolean(anchorElNav)}
+                    onClose={handleCloseNavMenu}
+                    sx={{
+                      display: { xs: "block", md: "none" },
+                    }}
+                    disableScrollLock={true}
+                  >
+                    {navItems.map((item) => (
+                      <MenuItem
+                        key={item}
+                        onClick={handleCloseNavMenu}
+                      >
+                        <Typography textAlign="center">{item}</Typography>
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </Box>
+
+                {/* Mobile Logo/Title */}
+                <Box
+                  sx={{
+                    direction: "ltr",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                    flexGrow: 1,
+                    [theme.breakpoints.down("md")]: {
+                      display: "flex",
+                    },
+                    [theme.breakpoints.up("md")]: {
+                      display: "none",
+                    },
+                  }}
+                >
+                  <BrandTypography
+                    variant="h6"
+                    noWrap
+                    component="a"
+                    href="/ss"
+                  >
+                    Dev
+                  </BrandTypography>
+                  <Typography
+                    sx={{
+                      color: [theme.palette.primary.main],
+                      fontSize: 24,
+                      fontWeight: 800,
+                    }}
+                  >
+                    /
+                  </Typography>
+                </Box>
+              </Box>
+            </Grid>
+            <Grid size={{ xs: "grow", md: 6 }}>
+              {/* Desktop Navigation Links */}
+              <Box
+                sx={{
+                  maxWidth: "800px",
+                  display: { xs: "none", md: "flex" },
+                  flexGrow: 1,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
               >
-                Farsi
-              </MenuItem>
-            </Select>
-            <Button
-              color="inherit"
-              sx={{ mr: 1 }}
-            >
-              Login
-            </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              sx={{ borderRadius: "8px" }}
-            >
-              Sign Up
-            </Button>
-          </Box>
-        </Toolbar>
-      </AppBar>
+                {navItems.map((item) => (
+                  <MenuTypographyDesktop key={item}>
+                    {item}
+                  </MenuTypographyDesktop>
+                ))}
+              </Box>
+            </Grid>
+            <Grid size={{ xs: "auto", md: "grow" }}>
+              {/* Right-aligned buttons (e.g., Login/Signup) */}
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Button
+                  onClick={() => {
+                    toggleThemeMode();
+                  }}
+                  disableElevation
+                >
+                  {mode === "dark" ? <DarkModeIcon /> : <LightModeIcon />}
+                </Button>
+                <Select
+                  value={language}
+                  onChange={languageChange}
+                  sx={{
+                    color: "white",
+                    border: "none",
+                    "& fieldset": { border: "none" },
+                  }}
+                >
+                  <MenuItem
+                    key={"En"}
+                    value={"En"}
+                  >
+                    <Typography sx={{ color: "black" }}>English</Typography>
+                  </MenuItem>
+                  <MenuItem
+                    key={"Fa"}
+                    value={"Fa"}
+                  >
+                    Farsi
+                  </MenuItem>
+                </Select>
+                <Button
+                  color="inherit"
+                  sx={{ mr: 1 }}
+                >
+                  Login
+                </Button>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  sx={{ borderRadius: "8px" }}
+                >
+                  Sign Up
+                </Button>
+              </Box>
+            </Grid>
+          </Toolbar>
+        </AppBar>
+      </Grid>
     </>
-  );
-  return (
-    <AppBar position="sticky">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <CodeIcon fontSize={"large"} />
-
-          <Button
-            sx={{ color: "white" }}
-            onClick={() => {
-              // dispatch(toggleThemeMode());
-              toggleThemeMode();
-            }}
-            disableElevation
-          >
-            {mode === "dark" ? <DarkModeIcon /> : <LightModeIcon />}
-          </Button>
-          <Select
-            value={language}
-            onChange={languageChange}
-            sx={{
-              color: "white",
-              border: "none",
-              "& fieldset": { border: "none" },
-            }}
-          >
-            <MenuItem
-              key={"En"}
-              value={"En"}
-            >
-              English
-            </MenuItem>
-            <MenuItem
-              key={"Fa"}
-              value={"Fa"}
-            >
-              Farsi
-            </MenuItem>
-          </Select>
-        </Toolbar>
-      </Container>
-    </AppBar>
   );
 }
 

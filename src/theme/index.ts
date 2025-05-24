@@ -16,6 +16,7 @@ const theme = createTheme({
     light: getDesignToken("light"),
     dark: getDesignToken("dark"),
   },
+
   components: {
     MuiAppBar: {
       styleOverrides: {

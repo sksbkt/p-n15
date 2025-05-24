@@ -1,9 +1,9 @@
 "use client";
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 function TestPage() {
   return (
-    <Box sx={{ p: 3, maxWidth: "800px", mx: "auto" }}>
+    <>
       <Typography
         variant="h4"
         gutterBottom
@@ -33,7 +33,7 @@ function TestPage() {
           culpa qui officia deserunt mollit anim id est laborum.
         </Typography>
       ))}
-    </Box>
+    </>
   );
 }
 
