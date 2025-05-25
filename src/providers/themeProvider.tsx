@@ -3,7 +3,7 @@
 import { useThemeMode } from "@/hooks/useThemeHook";
 import { useWindow } from "@/hooks/useWindow";
 import { store } from "@/store";
-import theme from "@/theme";
+import { useBaseTheme } from "@/theme/useBaseThemeHook";
 import { Direction } from "@/types";
 import {
   Box,
@@ -16,6 +16,7 @@ import { useEffect } from "react";
 import { Provider } from "react-redux";
 
 const ThemeContent = ({ children }: { children: React.ReactNode }) => {
+  const { theme } = useBaseTheme();
   const { direction, mode } = useThemeMode();
   const { setMode } = useColorScheme();
 
@@ -65,7 +66,7 @@ const ThemeContent = ({ children }: { children: React.ReactNode }) => {
 
 const ThemeProviderWrapper = ({ children }: { children: React.ReactNode }) => {
   // const [isScrolled, setIsScrolled] = useState(false);
-
+  const { theme } = useBaseTheme();
   return (
     <Provider store={store}>
       <InitColorSchemeScript

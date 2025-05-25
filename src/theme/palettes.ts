@@ -1,8 +1,12 @@
 "use client";
-import { PaletteMode } from "@mui/material";
+import {
+  ColorSystemOptions,
+  PaletteMode,
+  TypographyVariantsOptions,
+} from "@mui/material";
 
 // Define common typography settings
-const typography = {
+export const typographyOptions: TypographyVariantsOptions = {
   fontFamily: "Inter, sans-serif",
   h1: {
     fontWeight: 700,
@@ -35,7 +39,7 @@ const typography = {
 };
 
 // Define common component overrides
-const commonComponents = {
+export const commonComponents = {
   MuiButton: {
     styleOverrides: {
       root: {
@@ -70,7 +74,7 @@ const commonComponents = {
 };
 
 // Function to get the design tokens based on the mode
-export const getDesignToken = (mode: PaletteMode) => {
+export const getDesignToken = (mode: PaletteMode): ColorSystemOptions => {
   // Removed PaletteMode type for broader compatibility in this environment
   return {
     palette: {
@@ -148,70 +152,6 @@ export const getDesignToken = (mode: PaletteMode) => {
             },
             divider: "#4A5568", // Darker grey for dividers
           }),
-    },
-    typography: typography,
-    components: {
-      ...commonComponents,
-      // Mode-specific component overrides
-
-      MuiAppBar: {
-        styleOverrides: {
-          root: {
-            transition: "all 0.3s ease-in-out", // Smooth transition for size and position changes
-            boxShadow: "0 4px 8px rgba(0,0,0,0.1)", // Subtle shadow for depth
-            backgroundColor: mode === "light" ? "#FFFFFF" : "#2D3748",
-            color: mode === "light" ? "#2D3748" : "#FFFFFF",
-          },
-        },
-      },
-      MuiToolbar: {
-        styleOverrides: {
-          root: {
-            transition: "all 0.3s ease-in-out", // Smooth transition for padding changes
-          },
-        },
-      },
-      MuiButton: {
-        styleOverrides: {
-          root: {
-            borderRadius: "8px", // Rounded buttons
-          },
-        },
-      },
-      MuiCard: {
-        styleOverrides: {
-          root: {
-            ...commonComponents.MuiCard.styleOverrides.root,
-            boxShadow:
-              mode === "light"
-                ? "0px 4px 10px rgba(0, 0, 0, 0.05)"
-                : "0px 4px 10px rgba(0, 0, 0, 0.3)",
-            border:
-              mode === "light"
-                ? "1px solid #E2E8F0"
-                : "1px solid rgba(255, 255, 255, 0.1)",
-          },
-        },
-      },
-      MuiPaper: {
-        styleOverrides: {
-          root: {
-            ...commonComponents.MuiPaper.styleOverrides.root,
-            boxShadow:
-              mode === "light"
-                ? "0px 4px 10px rgba(0, 0, 0, 0.05)"
-                : "0px 4px 10px rgba(0, 0, 0, 0.3)",
-          },
-        },
-      },
-      MuiLink: {
-        styleOverrides: {
-          root: {
-            ...commonComponents.MuiLink.styleOverrides.root,
-            color: "#00BCD4", // Accent color for links (same for both modes)
-          },
-        },
-      },
     },
   };
 };

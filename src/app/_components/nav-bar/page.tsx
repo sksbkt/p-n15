@@ -25,8 +25,8 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useWindow } from "@/hooks/useWindow";
 import { styled } from "@mui/material/styles";
+import { MaterialUIDarkModeSwitch } from "@/app/_components/mui/darkmode-switch";
 function NavBar() {
-  // const dispatch = useDispatch();
   const [mounted, setMounted] = React.useState(false);
   const { setDirection, toggleThemeMode, direction, mode } = useThemeMode();
   const [language, setLanguage] = useState(direction === "ltr" ? "En" : "Fa");
@@ -81,7 +81,7 @@ function NavBar() {
     fontFamily: "monospace",
     fontWeight: 700,
     letterSpacing: ".1rem",
-    color: "inherit",
+    color: mode === "light" ? (isScrolled ? "inherit" : "#2D3748") : "inherit",
     textDecoration: "none",
     fontSize: isScrolled ? "1.2rem" : "1.5rem",
     transition: "font-size 0.3s ease-in-out",
@@ -302,39 +302,63 @@ function NavBar() {
             <Grid size={{ xs: "auto", md: "grow" }}>
               {/* Right-aligned buttons (e.g., Login/Signup) */}
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                <Button
+                {/* <Button
                   onClick={() => {
                     toggleThemeMode();
                   }}
                   disableElevation
                 >
                   {mode === "dark" ? <DarkModeIcon /> : <LightModeIcon />}
-                </Button>
+                </Button> */}
+                <MaterialUIDarkModeSwitch
+                  checked={mode !== "light"}
+                  onClick={toggleThemeMode}
+                />
                 <Select
                   value={language}
                   onChange={languageChange}
                   sx={{
-                    color: "white",
                     border: "none",
                     "& fieldset": { border: "none" },
+                    "& .MuiSelect-icon": {
+                      color: theme.palette.primary.main,
+                    },
                   }}
                 >
                   <MenuItem
                     key={"En"}
                     value={"En"}
                   >
-                    <Typography variant="body1">English</Typography>
+                    <Typography
+                      color="primary"
+                      variant="button"
+                    >
+                      English
+                    </Typography>
                   </MenuItem>
                   <MenuItem
                     key={"Fa"}
                     value={"Fa"}
                   >
-                    <Typography>Farsi</Typography>
+                    <Typography
+                      color="primary"
+                      variant="button"
+                    >
+                      Farsi
+                    </Typography>
                   </MenuItem>
                 </Select>
                 <Button
                   color="inherit"
-                  sx={{ mr: 1 }}
+                  sx={{
+                    mr: 1,
+                    color:
+                      mode === "light"
+                        ? isScrolled
+                          ? "inherit"
+                          : "#2D3748"
+                        : "inherit",
+                  }}
                 >
                   Login
                 </Button>
