@@ -16,7 +16,9 @@ const theme = createTheme({
     light: getDesignToken("light"),
     dark: getDesignToken("dark"),
   },
-
+  cssVariables: {
+    colorSchemeSelector: "class",
+  },
   components: {
     MuiAppBar: {
       styleOverrides: {

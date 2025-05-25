@@ -77,9 +77,6 @@ export const getDesignToken = (mode: PaletteMode) => {
       mode,
       ...(mode === "light"
         ? {
-            cssVariables: {
-              colorSchemeSelector: "class",
-            },
             primary: {
               main: "#00BCD4", // Teal accent color
               light: "#4DD0E1",
@@ -116,9 +113,6 @@ export const getDesignToken = (mode: PaletteMode) => {
             divider: "#E2E8F0", // Light grey for dividers
           }
         : {
-            cssVariables: {
-              colorSchemeSelector: "class",
-            },
             primary: {
               main: "#00BCD4", // Teal accent color
               light: "#4DD0E1",
