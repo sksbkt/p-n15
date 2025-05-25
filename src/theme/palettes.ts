@@ -153,11 +153,28 @@ export const getDesignToken = (mode: PaletteMode) => {
     components: {
       ...commonComponents,
       // Mode-specific component overrides
+
       MuiAppBar: {
         styleOverrides: {
           root: {
+            transition: "all 0.3s ease-in-out", // Smooth transition for size and position changes
+            boxShadow: "0 4px 8px rgba(0,0,0,0.1)", // Subtle shadow for depth
             backgroundColor: mode === "light" ? "#FFFFFF" : "#2D3748",
             color: mode === "light" ? "#2D3748" : "#FFFFFF",
+          },
+        },
+      },
+      MuiToolbar: {
+        styleOverrides: {
+          root: {
+            transition: "all 0.3s ease-in-out", // Smooth transition for padding changes
+          },
+        },
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            borderRadius: "8px", // Rounded buttons
           },
         },
       },

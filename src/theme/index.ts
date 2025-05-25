@@ -19,30 +19,7 @@ const theme = createTheme({
   cssVariables: {
     colorSchemeSelector: "class",
   },
-  components: {
-    MuiAppBar: {
-      styleOverrides: {
-        root: {
-          transition: "all 0.3s ease-in-out", // Smooth transition for size and position changes
-          boxShadow: "0 4px 8px rgba(0,0,0,0.1)", // Subtle shadow for depth
-        },
-      },
-    },
-    MuiToolbar: {
-      styleOverrides: {
-        root: {
-          transition: "all 0.3s ease-in-out", // Smooth transition for padding changes
-        },
-      },
-    },
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          borderRadius: "8px", // Rounded buttons
-        },
-      },
-    },
-  },
+  components: {},
 });
 // const theme = (mode: PaletteMode) => createTheme(getDesignToken(mode));
 export default theme;

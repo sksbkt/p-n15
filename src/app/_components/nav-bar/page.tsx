@@ -323,13 +323,13 @@ function NavBar() {
                     key={"En"}
                     value={"En"}
                   >
-                    <Typography sx={{ color: "black" }}>English</Typography>
+                    <Typography variant="body1">English</Typography>
                   </MenuItem>
                   <MenuItem
                     key={"Fa"}
                     value={"Fa"}
                   >
-                    Farsi
+                    <Typography>Farsi</Typography>
                   </MenuItem>
                 </Select>
                 <Button
