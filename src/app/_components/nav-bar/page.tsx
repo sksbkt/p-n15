@@ -121,7 +121,7 @@ function NavBar() {
     <>
       <Grid
         container
-        spacing={3}
+        spacing={{ xs: 2, lg: 6 }}
       >
         <AppBar
           position="fixed" // Keeps the AppBar fixed at the top
@@ -155,7 +155,7 @@ function NavBar() {
             }}
           >
             {/* Logo or Site Title */}
-            <Grid size={{ xs: "auto", md: "grow" }}>
+            <Grid size={{ xs: "auto", lg: "grow" }}>
               <Box
                 sx={{
                   direction: "ltr",
@@ -299,9 +299,18 @@ function NavBar() {
                 ))}
               </Box>
             </Grid>
-            <Grid size={{ xs: "auto", md: "grow" }}>
+            <Grid
+              size={{ md: "grow" }}
+              sx={{ [theme.breakpoints.down("md")]: { display: "none" } }}
+            >
               {/* Right-aligned buttons (e.g., Login/Signup) */}
-              <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-end",
+                }}
+              >
                 {/* <Button
                   onClick={() => {
                     toggleThemeMode();
