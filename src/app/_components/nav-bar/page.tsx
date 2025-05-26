@@ -26,11 +26,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { useWindow } from "@/hooks/useWindow";
 import { styled } from "@mui/material/styles";
 import { MaterialUIDarkModeSwitch } from "@/app/_components/mui/darkmode-switch";
+import DrawerMenu from "@/app/_components/nav-bar/_component/drawer-menu";
+import LanguageSelector from "@/app/_components/nav-bar/_component/language-selector";
 function NavBar() {
   const [mounted, setMounted] = React.useState(false);
   const { setDirection, toggleThemeMode, direction, mode } = useThemeMode();
   const [language, setLanguage] = useState(direction === "ltr" ? "En" : "Fa");
-  const theme = useTheme();
   React.useEffect(() => {
     setMounted(true);
   }, []);
@@ -56,23 +57,6 @@ function NavBar() {
 
   if (!mounted) return null;
 
-  const languageChange = (e: SelectChangeEvent<typeof language>) => {
-    e.preventDefault();
-
-    switch (e.target.value) {
-      case "En":
-        setLanguage("En");
-        setDirection("ltr");
-        break;
-      case "Fa":
-        setDirection("rtl");
-        setLanguage("Fa");
-        break;
-
-      default:
-        break;
-    }
-  };
   type ExtraProps = {
     component: React.ElementType;
     href: string;
@@ -125,7 +109,7 @@ function NavBar() {
       >
         <AppBar
           position="fixed" // Keeps the AppBar fixed at the top
-          sx={{
+          sx={(theme) => ({
             // Conditional margin from the top of the window
             mt: isScrolled ? "0px" : "10px",
             // Conditional horizontal margin to remove space for rounded corners when scrolled
@@ -138,7 +122,7 @@ function NavBar() {
             background: isScrolled ? "" : "transparent !important",
             zIndex: theme.zIndex.appBar + 1,
             boxShadow: "none !important",
-          }}
+          })}
         >
           <Toolbar
             sx={{
@@ -157,7 +141,7 @@ function NavBar() {
             {/* Logo or Site Title */}
             <Grid size={{ xs: "auto", lg: "grow" }}>
               <Box
-                sx={{
+                sx={(theme) => ({
                   direction: "ltr",
                   flexDirection: "row",
                   alignItems: "center",
@@ -169,30 +153,30 @@ function NavBar() {
                   [theme.breakpoints.down("md")]: {
                     display: "none",
                   },
-                }}
+                })}
               >
                 <BrandTypography
                   variant="h6"
                   noWrap
                   component="a"
                   href="/ss"
-                  sx={{
+                  sx={(theme) => ({
                     [theme.breakpoints.down("md")]: {
                       display: "none",
                     },
                     [theme.breakpoints.up("md")]: {
                       display: "flex",
                     },
-                  }}
+                  })}
                 >
                   Dev
                 </BrandTypography>
                 <Typography
-                  sx={{
+                  sx={(theme) => ({
                     color: [theme.palette.primary.main],
                     fontSize: 24,
                     fontWeight: 800,
-                  }}
+                  })}
                 >
                   /
                 </Typography>
@@ -204,7 +188,8 @@ function NavBar() {
                     display: { xs: "flex", md: "none" },
                   }}
                 >
-                  <IconButton
+                  <DrawerMenu menuItems={navItems} />
+                  {/* <IconButton
                     size="large"
                     aria-label="account of current user"
                     aria-controls="menu-appbar"
@@ -213,8 +198,8 @@ function NavBar() {
                     color="inherit"
                   >
                     <MenuIcon />
-                  </IconButton>
-                  <Menu
+                  </IconButton> */}
+                  {/* <Menu
                     id="menu-appbar"
                     anchorEl={anchorElNav}
                     anchorOrigin={{
@@ -229,7 +214,10 @@ function NavBar() {
                     open={Boolean(anchorElNav)}
                     onClose={handleCloseNavMenu}
                     sx={{
-                      display: { xs: "block", md: "none" },
+                      display: {
+                        xs: "block",
+                        md: "none",
+                      },
                     }}
                     disableScrollLock={true}
                   >
@@ -241,12 +229,12 @@ function NavBar() {
                         <Typography textAlign="center">{item}</Typography>
                       </MenuItem>
                     ))}
-                  </Menu>
+                  </Menu> */}
                 </Box>
 
                 {/* Mobile Logo/Title */}
                 <Box
-                  sx={{
+                  sx={(theme) => ({
                     direction: "ltr",
                     display: "flex",
                     flexDirection: "row",
@@ -259,7 +247,7 @@ function NavBar() {
                     [theme.breakpoints.up("md")]: {
                       display: "none",
                     },
-                  }}
+                  })}
                 >
                   <BrandTypography
                     variant="h6"
@@ -270,11 +258,11 @@ function NavBar() {
                     Dev
                   </BrandTypography>
                   <Typography
-                    sx={{
+                    sx={(theme) => ({
                       color: [theme.palette.primary.main],
                       fontSize: 24,
                       fontWeight: 800,
-                    }}
+                    })}
                   >
                     /
                   </Typography>
@@ -301,7 +289,9 @@ function NavBar() {
             </Grid>
             <Grid
               size={{ md: "grow" }}
-              sx={{ [theme.breakpoints.down("md")]: { display: "none" } }}
+              sx={(theme) => ({
+                [theme.breakpoints.down("md")]: { display: "none" },
+              })}
             >
               {/* Right-aligned buttons (e.g., Login/Signup) */}
               <Box
@@ -323,40 +313,7 @@ function NavBar() {
                   checked={mode !== "light"}
                   onClick={toggleThemeMode}
                 />
-                <Select
-                  value={language}
-                  onChange={languageChange}
-                  sx={{
-                    border: "none",
-                    "& fieldset": { border: "none" },
-                    "& .MuiSelect-icon": {
-                      color: theme.palette.primary.main,
-                    },
-                  }}
-                >
-                  <MenuItem
-                    key={"En"}
-                    value={"En"}
-                  >
-                    <Typography
-                      color="primary"
-                      variant="button"
-                    >
-                      English
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem
-                    key={"Fa"}
-                    value={"Fa"}
-                  >
-                    <Typography
-                      color="primary"
-                      variant="button"
-                    >
-                      Farsi
-                    </Typography>
-                  </MenuItem>
-                </Select>
+                <LanguageSelector />
                 <Button
                   color="inherit"
                   sx={{

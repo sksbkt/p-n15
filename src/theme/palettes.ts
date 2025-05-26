@@ -150,7 +150,7 @@ export const getDesignToken = (mode: PaletteMode): ColorSystemOptions => {
               secondary: "#A0AEC0", // Light grey text for secondary info
               disabled: "#6B7280",
             },
-            divider: "#4A5568", // Darker grey for dividers
+            divider: "#6B7280", // Darker grey for dividers
           }),
     },
   };
