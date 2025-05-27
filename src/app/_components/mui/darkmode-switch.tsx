@@ -3,7 +3,6 @@ import { styled, Switch } from "@mui/material";
 export const MaterialUIDarkModeSwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
-  padding: 7,
   "& .MuiSwitch-switchBase": {
     margin: 1,
     padding: 0,

@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Divider,
   Drawer,
   IconButton,
@@ -21,18 +22,91 @@ const DrawerMenu = ({ menuItems }: DrawerMenuProps) => {
   };
   const { mode, toggleThemeMode } = useThemeMode();
   const DrawerList = (
-    <Box sx={{ width: "250px" }}>
+    <Box
+      sx={{
+        width: "250px",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+      }}
+    >
       <List>
         {menuItems.map((text, index) => (
-          <ListItem key={index}>{text}</ListItem>
+          <ListItem
+            sx={{
+              padding: 2,
+              transition: "background-color 0.3s ease",
+              "&:hover": {
+                backgroundColor: "rgba(0,0,0,0.1)",
+                cursor: "pointer",
+              },
+              "& p": {
+                transition: "padding-left 0.3s ease",
+              },
+              "&:hover p": {
+                paddingLeft: "8px",
+              },
+            }}
+            key={index}
+          >
+            <p>{text}</p>
+          </ListItem>
         ))}
-        <Divider />
-        <MaterialUIDarkModeSwitch
-          checked={mode !== "light"}
-          onClick={toggleThemeMode}
-        />
-        <LanguageSelector />
       </List>
+      <Divider />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "start",
+          width: "100%",
+          flexGrow: 1,
+          justifyContent: "flex-end",
+        }}
+      >
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: "16px",
+          }}
+        >
+          <MaterialUIDarkModeSwitch
+            checked={mode !== "light"}
+            onClick={toggleThemeMode}
+          />
+          <LanguageSelector />
+        </Box>
+        <Divider />
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "start",
+            padding: "0 10px 20px 10px",
+            justifyContent: "flex-end",
+          }}
+        >
+          <Button
+            variant="contained"
+            color="secondary"
+            sx={{ borderRadius: "8px", width: "100%", mb: 1 }}
+          >
+            Sign Up
+          </Button>
+          <Button
+            color="inherit"
+            sx={{
+              color: "inherit",
+            }}
+          >
+            Login
+          </Button>
+        </Box>
+      </Box>
     </Box>
   );
   return (
