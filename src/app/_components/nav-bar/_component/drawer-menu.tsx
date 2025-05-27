@@ -123,7 +123,6 @@ const DrawerMenu = ({ menuItems, anchor }: DrawerMenuProps) => {
         aria-controls="menu-appbar"
         aria-haspopup="true"
         onClick={() => handleToggleNavMenu(true)}
-        color="inherit"
       >
         <MenuIcon />
       </IconButton>

@@ -1,27 +1,63 @@
 "use client";
-import { Box, Container, Typography } from "@mui/material";
-import React from "react";
+import {
+  Box,
+  Button,
+  Container,
+  TextField,
+  Typography,
+  useColorScheme,
+} from "@mui/material";
+import React, { useState } from "react";
 import CircleIcon from "@mui/icons-material/Circle";
 import Image from "next/image";
 import PanoramaFishEyeIcon from "@mui/icons-material/PanoramaFishEye";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
+import dynamic from "next/dynamic";
 const contactUs = "/images/contact-us.jpg";
+import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 const ContactPage = () => {
+  const { mode } = useColorScheme();
+  const [employeeMode, setEmployeeMode] = useState(0);
+
   return (
-    <Container>
+    <Container
+      sx={(theme) => ({
+        display: "flex",
+        justifyContent: "center",
+        minWidth: "400px ",
+        alignItems: "center",
+        [theme.breakpoints.down("md")]: {
+          maxWidth: "600px",
+        },
+      })}
+    >
       <Box
         sx={{
           borderRadius: 5,
-          background: "#F5F5F5",
+          background: mode === "dark" ? "#2D3748" : "#F5F5F5",
           boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
           display: "flex",
           flexDirection: "row",
           overflow: "hidden",
           height: "80dvh",
+          maxWidth: "1000px",
+          width: "100%",
         }}
       >
         {/* LEFT */}
-        <Box sx={{ flexGrow: 1 }}>
+        <Box
+          sx={(theme) => ({
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            width: "50%",
+            [theme.breakpoints.down("md")]: {
+              width: "100%",
+            },
+            position: "relative",
+          })}
+        >
           <Box
             sx={{
               display: "flex",
@@ -39,6 +75,105 @@ const ContactPage = () => {
             <CircleIcon
               sx={{ width: "0.7rem", height: "0.7rem", color: "#66CB57" }}
             />
+          </Box>
+          <Box sx={{ flexGrow: 1, m: 7 }}>
+            <form>
+              <Typography
+                variant="h5"
+                sx={{ fontWeight: 700, color: "text.secondary" }}
+              >
+                Chat to our team
+              </Typography>
+              <Typography
+                sx={{
+                  mt: 1,
+                  color: "text.secondary",
+                  fontSize: 15,
+                  fontWeight: 400,
+                }}
+              >
+                We’d love to hear from you! Whether you have a question,
+                feedback, or just want to connect.
+              </Typography>
+              <Box sx={{ display: "flex", gap: 2, width: "100%" }}>
+                <TextField
+                  label="First name"
+                  variant="standard"
+                  sx={{ color: "text.secondary", flexGrow: 1 }}
+                />
+                <TextField
+                  label="Last name"
+                  variant="standard"
+                  sx={{ color: "text.secondary", flexGrow: 1 }}
+                />
+              </Box>
+              <TextField
+                label="Job title"
+                variant="standard"
+                sx={{ color: "text.secondary", width: "100%" }}
+              />
+              <TextField
+                label="Work email"
+                variant="standard"
+                sx={{ color: "text.secondary", width: "100%" }}
+                type="email"
+              />
+              <TextField
+                label="Work email"
+                variant="standard"
+                sx={{ color: "text.secondary", width: "100%" }}
+                type="email"
+              />
+              {/* TODO: need to create the component */}
+              <TextField
+                placeholder="+1 123123 1231 232"
+                variant="standard"
+                sx={{ color: "text.secondary", width: "100%", mt: 2 }}
+                type="email"
+              />
+              <Box sx={{ mt: 2 }}>
+                <Typography
+                  sx={{
+                    fontSize: 14,
+                    fontWeight: 600,
+                    color: "text.secondary",
+                  }}
+                >
+                  Number of employees
+                </Typography>
+                <EmployeeType
+                  selected={employeeMode == 0}
+                  handleClick={() => setEmployeeMode(0)}
+                  icon={<PersonOutlineOutlinedIcon />}
+                >
+                  <Typography sx={{ fontSize: 15, fontWeight: 600 }}>
+                    I&apos;m a solo creator
+                  </Typography>
+                  <Typography sx={{ fontSize: 11, fontWeight: 300 }}>
+                    I need to setup an account for myself.
+                  </Typography>
+                </EmployeeType>
+                <EmployeeType
+                  selected={employeeMode == 1}
+                  handleClick={() => setEmployeeMode(1)}
+                  icon={<PeopleAltOutlinedIcon />}
+                >
+                  <Typography sx={{ fontSize: 15, fontWeight: 600 }}>
+                    I&apos;m part of a team
+                  </Typography>
+                  <Typography sx={{ fontSize: 11, fontWeight: 300 }}>
+                    I need to setup an account for a team.
+                  </Typography>
+                </EmployeeType>
+                <Button
+                  variant="contained"
+                  color="info"
+                  sx={{ width: "100%", mt: 2 }}
+                >
+                  Get in touch
+                </Button>
+              </Box>
+            </form>
           </Box>
         </Box>
         {/* RIGHT */}
@@ -102,7 +237,7 @@ const ContactPage = () => {
                   fontFamily: "monospace",
                   fontWeight: 700,
                   letterSpacing: ".1rem",
-
+                  color: "#2D3748",
                   textDecoration: "none",
                   fontSize: "1.5rem",
                   transition: "font-size 0.3s ease-in-out",
@@ -127,6 +262,8 @@ const ContactPage = () => {
               </Typography>
             </Box>
             <Image
+              // * just for review and avoid pixelated imagery
+              unoptimized={true}
               alt="contact us"
               src={contactUs}
               width={1000}
@@ -185,5 +322,88 @@ const ContactPage = () => {
     </Container>
   );
 };
+// ? PROCEED WITH CAUTION: its a workaround for the Nextjs forcing the SSR on client side component. it may have side effects and needs to be tested some more
+export default dynamic(() => Promise.resolve(ContactPage), { ssr: false });
 
-export default ContactPage;
+const EmployeeType = ({
+  selected,
+  handleClick,
+  icon,
+  children,
+}: {
+  selected: boolean;
+  handleClick: () => void;
+  icon: React.ReactNode;
+  children: React.ReactNode;
+}) => {
+  const { mode } = useColorScheme();
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "start",
+        alignItems: "center",
+        position: "relative",
+        border: `1.5px solid ${
+          selected
+            ? mode === "light"
+              ? "#444"
+              : "#fff"
+            : mode === "light"
+            ? "#ddd"
+            : "#444"
+        }`,
+        borderRadius: 2,
+        p: 1,
+        mt: 2,
+        gap: 1,
+        overflow: "hidden",
+        "&:hover": {
+          cursor: "pointer",
+        },
+        "&::after": {
+          zIndex: 2,
+          transition: ".2s all ease-in-out",
+          position: "absolute",
+          content: '""',
+          background: mode === "light" ? "#444" : "#fff",
+          width: "100%",
+          height: "100%",
+          top: 0,
+          left: 0,
+          opacity: 0.1,
+        },
+        "&:hover::after": {
+          opacity: 0.2,
+        },
+      }}
+      onClick={handleClick}
+    >
+      <Box
+        sx={{
+          aspectRatio: "1/1",
+          height: "30px",
+          borderRadius: 2,
+          m: 1,
+          border: "1px solid #ccc",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {icon}
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignContent: "start",
+        }}
+      >
+        {children}
+      </Box>
+    </Box>
+  );
+};
