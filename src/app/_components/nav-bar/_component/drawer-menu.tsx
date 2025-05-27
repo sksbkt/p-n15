@@ -12,10 +12,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { MaterialUIDarkModeSwitch } from "@/app/_components/mui/darkmode-switch";
 import { useThemeMode } from "@/hooks/useThemeHook";
 import LanguageSelector from "@/app/_components/nav-bar/_component/language-selector";
+import Link from "next/link";
 type DrawerMenuProps = {
-  menuItems: string[];
+  menuItems: { text: string; link: string }[];
+  anchor?: "left" | "right" | "top" | "bottom";
 };
-const DrawerMenu = ({ menuItems }: DrawerMenuProps) => {
+const DrawerMenu = ({ menuItems, anchor }: DrawerMenuProps) => {
   const [open, setOpen] = useState(false);
   const handleToggleNavMenu = (val: boolean) => {
     setOpen(val);
@@ -31,7 +33,7 @@ const DrawerMenu = ({ menuItems }: DrawerMenuProps) => {
       }}
     >
       <List>
-        {menuItems.map((text, index) => (
+        {menuItems.map(({ text, link }, index) => (
           <ListItem
             sx={{
               padding: 2,
@@ -49,7 +51,7 @@ const DrawerMenu = ({ menuItems }: DrawerMenuProps) => {
             }}
             key={index}
           >
-            <p>{text}</p>
+            <Link href={link}>{text}</Link>
           </ListItem>
         ))}
       </List>
@@ -101,9 +103,13 @@ const DrawerMenu = ({ menuItems }: DrawerMenuProps) => {
             color="inherit"
             sx={{
               color: "inherit",
+              fontSize: "0.85rem", // small screens
+
+              width: "100%",
+              textAlign: "left",
             }}
           >
-            Login
+            Already have an account? Sign In
           </Button>
         </Box>
       </Box>
@@ -123,7 +129,8 @@ const DrawerMenu = ({ menuItems }: DrawerMenuProps) => {
       </IconButton>
       <Drawer
         open={open}
-        onClose={() => handleToggleNavMenu(false)}
+        anchor={anchor}
+        onClose={() => setOpen(false)}
         sx={{
           "& .MuiDrawer-paper": { borderRadius: 0 },
         }}

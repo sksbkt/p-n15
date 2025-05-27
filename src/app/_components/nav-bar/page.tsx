@@ -28,6 +28,7 @@ import { styled } from "@mui/material/styles";
 import { MaterialUIDarkModeSwitch } from "@/app/_components/mui/darkmode-switch";
 import DrawerMenu from "@/app/_components/nav-bar/_component/drawer-menu";
 import LanguageSelector from "@/app/_components/nav-bar/_component/language-selector";
+import Link from "next/link";
 function NavBar() {
   const [mounted, setMounted] = React.useState(false);
   const { setDirection, toggleThemeMode, direction, mode } = useThemeMode();
@@ -53,7 +54,12 @@ function NavBar() {
   };
 
   // Define navigation links
-  const navItems = ["Home", "About", "Services", "Contact"];
+  const navItems = [
+    { text: "Home", link: "/" },
+    { text: "About", link: "/about" },
+    { text: "Services", link: "/services" },
+    { text: "Contact", link: "/contact" },
+  ];
 
   if (!mounted) return null;
 
@@ -188,7 +194,10 @@ function NavBar() {
                     display: { xs: "flex", md: "none" },
                   }}
                 >
-                  <DrawerMenu menuItems={navItems} />
+                  <DrawerMenu
+                    menuItems={navItems}
+                    anchor={direction === "ltr" ? "left" : "right"}
+                  />
                   {/* <IconButton
                     size="large"
                     aria-label="account of current user"
@@ -280,9 +289,9 @@ function NavBar() {
                   alignItems: "center",
                 }}
               >
-                {navItems.map((item) => (
-                  <MenuTypographyDesktop key={item}>
-                    {item}
+                {navItems.map(({ text, link }, index) => (
+                  <MenuTypographyDesktop key={index}>
+                    <Link href={link}>{text}</Link>
                   </MenuTypographyDesktop>
                 ))}
               </Box>

@@ -2,6 +2,7 @@ import { Box, Grid } from "@mui/material";
 import React from "react";
 
 const layout = ({ children }: { children: React.ReactElement }) => {
+  return children;
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid
