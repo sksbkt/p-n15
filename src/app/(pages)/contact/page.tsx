@@ -1,8 +1,10 @@
+"use client";
 import { Box, Container, Typography } from "@mui/material";
 import React from "react";
 import CircleIcon from "@mui/icons-material/Circle";
 import Image from "next/image";
 import PanoramaFishEyeIcon from "@mui/icons-material/PanoramaFishEye";
+import AcUnitIcon from "@mui/icons-material/AcUnit";
 const contactUs = "/images/contact-us.jpg";
 const ContactPage = () => {
   return (
@@ -41,11 +43,13 @@ const ContactPage = () => {
         </Box>
         {/* RIGHT */}
         <Box
-          sx={{
+          sx={(theme) => ({
             width: "50%",
             padding: 1,
-            display: { sm: "none", md: "block" },
-          }}
+            [theme.breakpoints.down("md")]: {
+              display: "none",
+            },
+          })}
         >
           <Box
             sx={{
@@ -69,6 +73,59 @@ const ContactPage = () => {
               },
             }}
           >
+            <Box
+              sx={{
+                position: "absolute",
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                gap: 1,
+                left: 15,
+                top: 10,
+              }}
+            >
+              <Box
+                sx={{
+                  background: "rgba(0, 0, 0, 0.1)",
+                  padding: "2px",
+                  borderRadius: 1,
+                }}
+              >
+                <AcUnitIcon sx={{ color: "#fff" }} />
+              </Box>
+              <Typography
+                variant="h6"
+                noWrap
+                component="a"
+                href="/ss"
+                sx={(theme) => ({
+                  fontFamily: "monospace",
+                  fontWeight: 700,
+                  letterSpacing: ".1rem",
+
+                  textDecoration: "none",
+                  fontSize: "1.5rem",
+                  transition: "font-size 0.3s ease-in-out",
+                  [theme.breakpoints.down("md")]: {
+                    display: "none",
+                  },
+                  [theme.breakpoints.up("md")]: {
+                    display: "flex",
+                  },
+                })}
+              >
+                Dev
+              </Typography>
+              <Typography
+                sx={(theme) => ({
+                  color: [theme.palette.primary.main],
+                  fontSize: 24,
+                  fontWeight: 800,
+                })}
+              >
+                /
+              </Typography>
+            </Box>
             <Image
               alt="contact us"
               src={contactUs}
@@ -94,13 +151,12 @@ const ContactPage = () => {
                 width: "90%",
               }}
             >
-              <Typography>
-                It is a long established fact that a reader will be distracted
-                by the readable content of a page when looking at its layout.
-                The point of using Lorem Ipsum is that it has a more-or-less
-                normal distribution of letters, as opposed to using
-                &apos;Content here, content here&apos;, making it look like
-                readable English.
+              <Typography sx={{ fontWeight: 300, fontSize: 18 }}>
+                Every line of code shapes the future. As developers, we solve
+                problems and make an impact. Innovation thrives on curiosity and
+                persistence. Embrace challenges, learn from setbacks, and
+                celebrate victories. Together, we build possibilities—let’s keep
+                pushing boundaries and turning vision into reality.
               </Typography>
               <Box
                 sx={{
