@@ -4,35 +4,27 @@ import {
   AppBar,
   Box,
   Button,
-  Container,
   Grid,
-  IconButton,
-  Menu,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
   Toolbar,
   Typography,
   useTheme,
 } from "@mui/material";
 import React, { useState } from "react";
-import CodeIcon from "@mui/icons-material/Code";
 // import { useDispatch } from "react-redux";
 import { useThemeMode } from "@/hooks/useThemeHook";
 
-import LightModeIcon from "@mui/icons-material/LightMode";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import MenuIcon from "@mui/icons-material/Menu";
 import { useWindow } from "@/hooks/useWindow";
 import { styled } from "@mui/material/styles";
 import { MaterialUIDarkModeSwitch } from "@/app/_components/mui/darkmode-switch";
 import DrawerMenu from "@/app/_components/nav-bar/_component/drawer-menu";
 import LanguageSelector from "@/app/_components/nav-bar/_component/language-selector";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import path from "path";
 function NavBar() {
+  const pathName = usePathname();
   const [mounted, setMounted] = React.useState(false);
-  const { setDirection, toggleThemeMode, direction, mode } = useThemeMode();
-  const [language, setLanguage] = useState(direction === "ltr" ? "En" : "Fa");
+  const { toggleThemeMode, direction, mode } = useThemeMode();
   React.useEffect(() => {
     setMounted(true);
   }, []);
@@ -154,7 +146,6 @@ function NavBar() {
             >
               <Box
                 sx={(theme) => ({
-                  direction: "ltr",
                   flexDirection: "row",
                   alignItems: "center",
                   justifyContent: "flex-start",
@@ -204,47 +195,6 @@ function NavBar() {
                     menuItems={navItems}
                     anchor={direction === "ltr" ? "left" : "right"}
                   />
-                  {/* <IconButton
-                    size="large"
-                    aria-label="account of current user"
-                    aria-controls="menu-appbar"
-                    aria-haspopup="true"
-                    onClick={handleOpenNavMenu}
-                    color="inherit"
-                  >
-                    <MenuIcon />
-                  </IconButton> */}
-                  {/* <Menu
-                    id="menu-appbar"
-                    anchorEl={anchorElNav}
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "left",
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "left",
-                    }}
-                    open={Boolean(anchorElNav)}
-                    onClose={handleCloseNavMenu}
-                    sx={{
-                      display: {
-                        xs: "block",
-                        md: "none",
-                      },
-                    }}
-                    disableScrollLock={true}
-                  >
-                    {navItems.map((item) => (
-                      <MenuItem
-                        key={item}
-                        onClick={handleCloseNavMenu}
-                      >
-                        <Typography textAlign="center">{item}</Typography>
-                      </MenuItem>
-                    ))}
-                  </Menu> */}
                 </Box>
 
                 {/* Mobile Logo/Title */}
@@ -290,14 +240,25 @@ function NavBar() {
                 sx={{
                   maxWidth: "800px",
                   display: { xs: "none", md: "flex" },
-                  flexGrow: 1,
-                  justifyContent: "start",
-                  alignItems: "center",
                 }}
               >
                 {navItems.map(({ text, link }, index) => (
-                  <MenuTypographyDesktop key={index}>
-                    <Link href={link}>{text}</Link>
+                  <MenuTypographyDesktop
+                    sx={
+                      pathName === link
+                        ? {
+                            color: "text.primary",
+                            "&::after": {
+                              width: "100%",
+                              backgroundColor: "text.primary",
+                            },
+                            cursor: "default",
+                          }
+                        : {}
+                    }
+                    key={index}
+                  >
+                    {pathName === link ? text : <Link href={link}>{text}</Link>}
                   </MenuTypographyDesktop>
                 ))}
               </Box>

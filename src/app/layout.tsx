@@ -26,7 +26,9 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <AppProvider>
             <NavBar />
-            <Suspense fallback={<LoadingPage />}>{children}</Suspense>
+            {/* <Suspense fallback={<LoadingPage />}> */}
+            {children}
+            {/* </Suspense> */}
           </AppProvider>
         </AppRouterCacheProvider>
       </body>
