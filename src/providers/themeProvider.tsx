@@ -46,7 +46,7 @@ const ThemeContent = ({ children }: { children: React.ReactNode }) => {
         // setIsScrolled(false);
       }
     };
-
+    handleScroll();
     // Add the scroll event listener when the component mounts
     window.addEventListener("scroll", handleScroll);
 
@@ -55,6 +55,8 @@ const ThemeContent = ({ children }: { children: React.ReactNode }) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [setIsScrolled]);
+
+  useEffect(() => {}, []);
   return (
     <>
       <Box sx={{ height: isScrolled ? "60px" : "90px" }} />

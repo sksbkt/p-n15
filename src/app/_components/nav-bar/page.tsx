@@ -20,7 +20,6 @@ import DrawerMenu from "@/app/_components/nav-bar/_component/drawer-menu";
 import LanguageSelector from "@/app/_components/nav-bar/_component/language-selector";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import path from "path";
 function NavBar() {
   const pathName = usePathname();
   const [mounted, setMounted] = React.useState(false);
@@ -88,7 +87,7 @@ function NavBar() {
       position: "absolute",
       left: 0,
       bottom: 0,
-      height: "2px",
+      height: "1px",
       width: 0,
       background: theme.palette.primary.main,
       borderRadius: "2px",
@@ -120,6 +119,9 @@ function NavBar() {
             background: isScrolled ? "" : "transparent !important",
             zIndex: theme.zIndex.appBar + 1,
             boxShadow: "none !important",
+            borderBottom: isScrolled
+              ? "1px solid" + theme.palette.text.disabled
+              : "none",
           })}
         >
           <Toolbar
@@ -172,7 +174,7 @@ function NavBar() {
                     },
                   })}
                 >
-                  Dev
+                  TechNova
                 </BrandTypography>
                 <Typography
                   sx={(theme) => ({
@@ -220,7 +222,7 @@ function NavBar() {
                     component="a"
                     href="/ss"
                   >
-                    Dev
+                    TechNova
                   </BrandTypography>
                   <Typography
                     sx={(theme) => ({
@@ -247,10 +249,14 @@ function NavBar() {
                     sx={
                       pathName === link
                         ? {
-                            color: "text.primary",
+                            color: isScrolled
+                              ? "primary.contrastText"
+                              : "text.primary",
                             "&::after": {
                               width: "100%",
-                              backgroundColor: "text.primary",
+                              backgroundColor: isScrolled
+                                ? "primary.contrastText"
+                                : "text.primary",
                             },
                             cursor: "default",
                           }

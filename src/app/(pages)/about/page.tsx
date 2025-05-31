@@ -64,7 +64,7 @@ const AboutPage = () => {
           </Typography>
           <Typography
             variant="body1"
-            align="center"
+            align="justify"
             sx={{ maxWidth: 700 }}
           >
             TechNova Solutions is a leading software company specializing in
@@ -104,8 +104,9 @@ const AboutPage = () => {
               <Card
                 sx={{
                   alignItems: "center",
-                  textAlign: "center",
+                  textAlign: "start",
                   height: "300px",
+                  gap: 2,
                 }}
               >
                 <CardHeader
@@ -118,7 +119,7 @@ const AboutPage = () => {
                   }
                   title={person.name}
                   subheader={person.title}
-                  sx={{ pb: 0 }}
+                  sx={{ pb: 0, gap: 2 }}
                 />
                 <CardContent>
                   <Typography variant="body2">{person.bio}</Typography>
@@ -165,8 +166,7 @@ const AboutPage = () => {
               title="Company Location"
               width="100%"
               height="100%"
-              frameBorder="0"
-              style={{ border: 0 }}
+              style={{ border: "1px solid primary.main" }}
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019017063191!2d-122.39691768468114!3d37.7811579797577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064d1b3e7c7%3A0x2e8b8e7e8e8e8e8e!2s123%20Innovation%20Dr%2C%20San%20Francisco%2C%20CA%2094107%2C%20USA!5e0!3m2!1sen!2sus!4v1710000000000"
               allowFullScreen
               loading="lazy"
