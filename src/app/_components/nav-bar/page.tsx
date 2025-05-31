@@ -56,8 +56,8 @@ function NavBar() {
   // Define navigation links
   const navItems = [
     { text: "Home", link: "/" },
-    { text: "About", link: "/about" },
     { text: "Services", link: "/services" },
+    { text: "About", link: "/about" },
     { text: "Contact", link: "/contact" },
   ];
 
@@ -145,7 +145,13 @@ function NavBar() {
             }}
           >
             {/* Logo or Site Title */}
-            <Grid size={{ xs: "auto", lg: "grow" }}>
+            <Grid
+              size={
+                {
+                  // xs: "auto", lg: "grow"
+                }
+              }
+            >
               <Box
                 sx={(theme) => ({
                   direction: "ltr",
@@ -285,7 +291,7 @@ function NavBar() {
                   maxWidth: "800px",
                   display: { xs: "none", md: "flex" },
                   flexGrow: 1,
-                  justifyContent: "center",
+                  justifyContent: "start",
                   alignItems: "center",
                 }}
               >

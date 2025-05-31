@@ -51,7 +51,12 @@ const DrawerMenu = ({ menuItems, anchor }: DrawerMenuProps) => {
             }}
             key={index}
           >
-            <Link href={link}>{text}</Link>
+            <Link
+              href={link}
+              onClick={() => setOpen(false)}
+            >
+              {text}
+            </Link>
           </ListItem>
         ))}
       </List>

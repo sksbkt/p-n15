@@ -25,10 +25,8 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         <AppRouterCacheProvider>
           <AppProvider>
-            <Suspense fallback={<LoadingPage />}>
-              <NavBar />
-              {children}
-            </Suspense>
+            <NavBar />
+            <Suspense fallback={<LoadingPage />}>{children}</Suspense>
           </AppProvider>
         </AppRouterCacheProvider>
       </body>
