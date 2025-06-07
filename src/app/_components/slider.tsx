@@ -175,7 +175,14 @@ const SliderComponent = () => {
                     display:none;
                 }
                 .slick-next:before{
-                        display:none;
+                    display:none;
+                }
+                .slick-slide{
+                    filter: saturate(0.2) blur(2px);   
+                }
+                .slick-current{
+                     transition:filter 0.3s ease-in;
+                     filter: saturate(1.2);   
                 }
                 `}
         </style>

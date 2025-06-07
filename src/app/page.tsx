@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Typography, Button, Container } from "@mui/material";
 import SliderComponent from "@/app/_components/slider";
 import "slick-carousel/slick/slick.css";
@@ -23,6 +23,28 @@ export default function Home() {
       image: "https://picsum.photos/800/300?random=3",
     },
   ];
+  const [opacity, setOpacity] = useState(1);
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout | null = null;
+
+    const handleScroll = () => {
+      if (timeoutId) return;
+      timeoutId = setTimeout(() => {
+        const scrollY = window.scrollY;
+        const newOpacity = Math.max(1 - scrollY / 300, 0);
+        setOpacity(newOpacity);
+        timeoutId = null;
+      }, 500);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, []);
+
   return (
     <Box>
       {/* Parallax Section */}
@@ -32,6 +54,7 @@ export default function Home() {
           backgroundImage: `url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80')`,
           backgroundAttachment: "fixed",
           backgroundPosition: "center",
+          opacity: opacity,
           backgroundSize: "cover",
           display: "flex",
           alignItems: "center",
