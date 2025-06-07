@@ -1,5 +1,5 @@
 import { RootState } from "@/store";
-import { setIsScrolled as setIsScrolledStore } from "@/store/widowSlice";
+import { setIsScrolled as setIsScrolledStore } from "@/store/windowSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 export const useWindow = () => {

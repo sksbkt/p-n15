@@ -8,7 +8,6 @@ const scrollSlice = createSlice({
   reducers: {
     setIsScrolled: (state, action) => {
       state.isScrolled = action.payload;
-      console.log(action.payload);
     },
   },
 });

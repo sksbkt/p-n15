@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import themeReducer from "./themeSlice";
-import windowReducer from "./widowSlice";
+import windowReducer from "./windowSlice";
 import {
   readFromLocalStorage,
   writeToLocalStorage,
