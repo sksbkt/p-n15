@@ -76,6 +76,18 @@ export default function Home() {
       >
         <SliderComponent />
       </Container>
+      <Container
+        maxWidth="md"
+        sx={{ my: 6 }}
+      >
+        <SliderComponent />
+      </Container>
+      <Container
+        maxWidth="md"
+        sx={{ my: 6 }}
+      >
+        <SliderComponent />
+      </Container>
 
       {/* Games Grid */}
       {/* <Container

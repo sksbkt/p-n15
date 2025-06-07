@@ -77,6 +77,8 @@ const SliderComponent = () => {
     <>
       <Box sx={{ position: "relative" }}>
         <Slider
+          //   autoplay={true}
+          autoplaySpeed={3000}
           dots={true}
           infinite
           speed={500}
@@ -98,19 +100,57 @@ const SliderComponent = () => {
                   height="300"
                   image={game.image}
                   alt={game.title}
+                  sx={{
+                    width: "100%",
+                    height: { xs: 180, sm: 250, md: 300 },
+                    objectFit: "cover",
+                  }}
                 />
                 <CardContent
-                  sx={{
+                  sx={(theme) => ({
                     position: "absolute",
                     bottom: 0,
                     left: 0,
                     width: "100%",
-                    bgcolor: "rgba(0,0,0,0.5)",
+                    background:
+                      "linear-gradient(180deg,rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.4) 34%, rgba(0, 0, 0, 0.4) 99%)",
+                    backdropFilter: "blur(1px) saturate(0.4)",
                     color: "#fff",
-                  }}
+                    p: { md: 3 },
+                    [theme.breakpoints.down("md")]: {
+                      display: "flex",
+                      height: "1.2rem",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      textAlign: "center",
+                    },
+                  })}
                 >
-                  <Typography variant="h5">{game.title}</Typography>
-                  <Typography variant="body2">{game.description}</Typography>
+                  <Typography
+                    variant="h6"
+                    sx={(theme) => ({
+                      [theme.breakpoints.down("md")]: {
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      },
+                      fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
+                      fontWeight: 600,
+                    })}
+                  >
+                    {game.title}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={(theme) => ({
+                      [theme.breakpoints.down("md")]: {
+                        display: "none",
+                      },
+                      fontSize: { md: "1rem" },
+                    })}
+                  >
+                    {game.description}
+                  </Typography>
                 </CardContent>
               </Card>
             </Box>
