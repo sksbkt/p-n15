@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
-import { Suspense } from "react";
-import LoadingPage from "@/app/loading";
 import NavBar from "@/app/_components/nav-bar/page";
 import { AppProvider } from "@/providers";
 
@@ -26,9 +24,7 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <AppProvider>
             <NavBar />
-            {/* <Suspense fallback={<LoadingPage />}> */}
             {children}
-            {/* </Suspense> */}
           </AppProvider>
         </AppRouterCacheProvider>
       </body>

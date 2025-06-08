@@ -1,47 +1,44 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { Box, Typography, Button, Container } from "@mui/material";
 import SliderComponent from "@/app/_components/slider";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export default function Home() {
-  const games = [
+  const projects = [
     {
-      title: "Space Adventure",
-      description: "Explore the galaxy and conquer new worlds.",
-      image: "https://picsum.photos/800/300?random=1",
+      title: "NovaCRM",
+      description:
+        "A modern CRM platform to manage your clients and sales pipeline efficiently.",
+      image: "https://picsum.photos/800/300?random=11",
     },
     {
-      title: "Fantasy Quest",
-      description: "Embark on an epic journey in a magical realm.",
-      image: "https://picsum.photos/800/300?random=2",
+      title: "TechBlog",
+      description:
+        "A feature-rich blogging platform for developers and tech enthusiasts.",
+      image: "https://picsum.photos/800/300?random=12",
     },
     {
-      title: "Racing Thunder",
-      description: "Feel the adrenaline in high-speed races.",
-      image: "https://picsum.photos/800/300?random=3",
+      title: "DevTracker",
+      description:
+        "Track your software development tasks and collaborate with your team seamlessly.",
+      image: "https://picsum.photos/800/300?random=13",
     },
   ];
-  const [opacity, setOpacity] = useState(1);
-
+  const parallaxBoxRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout | null = null;
-
+    // let timeoutId: NodeJS.Timeout | null = null;
     const handleScroll = () => {
-      if (timeoutId) return;
-      timeoutId = setTimeout(() => {
-        const scrollY = window.scrollY;
-        const newOpacity = Math.max(1 - scrollY / 300, 0);
-        setOpacity(newOpacity);
-        timeoutId = null;
-      }, 500);
+      const scrollY = window.scrollY;
+      const newOpacity = Math.max(1 - scrollY / 300, 0);
+      if (parallaxBoxRef.current)
+        parallaxBoxRef.current.style.opacity = newOpacity.toString();
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      if (timeoutId) clearTimeout(timeoutId);
     };
   }, []);
 
@@ -49,34 +46,38 @@ export default function Home() {
     <Box>
       {/* Parallax Section */}
       <Box
+        ref={parallaxBoxRef}
         sx={{
           height: 400,
-          backgroundImage: `url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80')`,
+          backgroundImage: `url('https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
           backgroundAttachment: "fixed",
           backgroundPosition: "center",
-          opacity: opacity,
+          // opacity: opacity,
           backgroundSize: "cover",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           color: "#fff",
+          transition: "opacity 0.3s ease-in-out",
         }}
       >
         <Box
           textAlign="center"
-          bgcolor="rgba(0,0,0,0.5)"
+          bgcolor="rgba(0,0,0,.9)"
           p={4}
           borderRadius={2}
         >
           <Typography
             variant="h2"
             fontWeight="bold"
+            textAlign={"start"}
             gutterBottom
           >
-            Welcome to GameVerse
+            TechNova Software Development Industry
           </Typography>
           <Typography
             variant="h5"
+            textAlign={"start"}
             gutterBottom
           >
             Discover, play, and compete in the best games!

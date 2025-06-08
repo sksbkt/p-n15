@@ -31,7 +31,7 @@ const SliderComponent = () => {
   ];
 
   // Custom Arrow Components
-  const NextArrow = (props: any) => {
+  const NextArrow = (props: React.ComponentPropsWithoutRef<"button">) => {
     const { className, style, onClick } = props;
     return (
       <IconButton
@@ -52,7 +52,7 @@ const SliderComponent = () => {
     );
   };
 
-  const PrevArrow = (props: any) => {
+  const PrevArrow = (props: React.ComponentPropsWithoutRef<"button">) => {
     const { className, style, onClick } = props;
     return (
       <IconButton

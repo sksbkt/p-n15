@@ -119,9 +119,6 @@ function NavBar() {
             background: isScrolled ? "" : "transparent !important",
             zIndex: theme.zIndex.appBar + 1,
             boxShadow: "none !important",
-            borderBottom: isScrolled
-              ? "1px solid" + theme.palette.text.disabled
-              : "none",
           })}
         >
           <Toolbar
@@ -312,8 +309,9 @@ function NavBar() {
                 </Button>
                 <Button
                   variant="contained"
-                  color="secondary"
-                  sx={{ borderRadius: "8px" }}
+                  sx={(theme) => ({
+                    borderRadius: "20px",
+                  })}
                 >
                   Sign Up
                 </Button>
