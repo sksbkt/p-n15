@@ -56,7 +56,7 @@ function Home() {
   return (
     <Box>
       {/* Parallax Section */}
-      <Box
+      {/* <Box
         ref={parallaxBoxRef}
         sx={{
           height: { xs: "50vh", sm: "70vh", md: "80vh" },
@@ -144,21 +144,9 @@ function Home() {
             </Button>
           </Box>
         </Box>
-      </Box>
+      </Box> */}
 
       {/* Carousel Section */}
-      <Container
-        maxWidth="md"
-        sx={{ my: 6 }}
-      >
-        <SliderComponent />
-      </Container>
-      <Container
-        maxWidth="md"
-        sx={{ my: 6 }}
-      >
-        <SliderComponent />
-      </Container>
       <Container
         maxWidth="md"
         sx={{ my: 6 }}
