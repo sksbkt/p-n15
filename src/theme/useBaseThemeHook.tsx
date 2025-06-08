@@ -3,7 +3,7 @@ import {
   getDesignToken,
   typographyOptions,
 } from "@/theme/palettes";
-import { createTheme, useColorScheme } from "@mui/material";
+import { createTheme, PaletteMode, useColorScheme } from "@mui/material";
 import { useMemo } from "react";
 
 export const useBaseTheme = () => {
@@ -13,7 +13,8 @@ export const useBaseTheme = () => {
     () =>
       createTheme({
         palette: {
-          mode,
+          mode: mode as PaletteMode,
+          ...getDesignToken(mode as PaletteMode),
         },
         colorSchemes: {
           light: getDesignToken("light"),

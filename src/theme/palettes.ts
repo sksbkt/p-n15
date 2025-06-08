@@ -105,6 +105,7 @@ export const getDesignToken = (mode: PaletteMode): ColorSystemOptions => {
             success: {
               main: "#4CAF50",
             },
+
             background: {
               default: "#F7FAFC", // Very light grey/off-white for main background
               paper: "#FFFFFF", // White for cards/surfaces

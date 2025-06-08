@@ -4,8 +4,11 @@ import { Box, Typography, Button, Container } from "@mui/material";
 import SliderComponent from "@/app/_components/slider";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useThemeMode } from "@/hooks/useThemeHook";
+import dynamic from "next/dynamic";
 
-export default function Home() {
+function Home() {
+  const { mode } = useThemeMode();
   const projects = [
     {
       title: "NovaCRM",
@@ -31,9 +34,17 @@ export default function Home() {
     // let timeoutId: NodeJS.Timeout | null = null;
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const newOpacity = Math.max(1 - scrollY / 300, 0);
-      if (parallaxBoxRef.current)
+      const newOpacity = Math.max(1 - (scrollY - 400) / 400, 0);
+      if (!parallaxBoxRef.current) return;
+      parallaxBoxRef.current.style.backgroundSize = `calc(${
+        scrollY * 0.02
+      }% + 100%)`;
+
+      if (scrollY > 400) {
         parallaxBoxRef.current.style.opacity = newOpacity.toString();
+      } else if (parallaxBoxRef.current) {
+        parallaxBoxRef.current.style.opacity = "1";
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -48,8 +59,12 @@ export default function Home() {
       <Box
         ref={parallaxBoxRef}
         sx={{
-          height: 400,
-          backgroundImage: `url('https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
+          height: { xs: "50vh", sm: "70vh", md: "80vh" },
+          width: "100%",
+          backgroundImage:
+            mode === "dark"
+              ? `url('https://images.unsplash.com/photo-1607799279861-4dd421887fb3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`
+              : `url('https://images.unsplash.com/photo-1579412690850-bd41cd0af397?q=80&w=1965&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')`,
           backgroundAttachment: "fixed",
           backgroundPosition: "center",
           // opacity: opacity,
@@ -63,33 +78,71 @@ export default function Home() {
       >
         <Box
           textAlign="center"
-          bgcolor="rgba(0,0,0,.9)"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "start",
+            gap: { xs: 1, md: 1, lg: 2 },
+            background:
+              "linear-gradient(-135deg, rgba(20,20,40,0.95) 0%, rgba(40,40,80,0.85) 100%)",
+          }}
           p={4}
+          m={{ xs: 2, sm: 4, md: 6 }}
+          width={{ xs: "100%", sm: "80%", md: "60%" }}
           borderRadius={2}
         >
           <Typography
-            variant="h2"
+            variant="h3"
             fontWeight="bold"
             textAlign={"start"}
             gutterBottom
+            sx={{
+              fontSize: { xs: "1.8rem", sm: "2.5rem", md: "3rem" },
+              fontWeight: "bold",
+            }}
           >
             TechNova Software Development Industry
           </Typography>
           <Typography
-            variant="h5"
-            textAlign={"start"}
+            variant="body1"
+            textAlign="start"
             gutterBottom
+            sx={{
+              fontSize: { xs: "0.9rem", sm: "1rem", md: "1.2rem" },
+            }}
           >
-            Discover, play, and compete in the best games!
+            We provide innovative solutions to empower your business growth. Our
+            team delivers robust, scalable, and user-friendly applications
+            tailored to your needs. Partner with us to accelerate your digital
+            transformation and stay ahead in a competitive market.
           </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            size="large"
-            sx={{ mt: 3 }}
+          <Box
+            sx={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "row",
+              flexShrink: 1,
+              gap: 2,
+              border: "1px solid rgba(255, 255, 255, 0.2)",
+              borderRadius: "50px",
+              padding: "10px",
+            }}
           >
-            Get Started
-          </Button>
+            <Typography sx={{ p: "0 10px 0 20px" }}>
+              lets try our demos
+            </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              sx={(theme) => ({
+                borderRadius: "50px",
+              })}
+            >
+              Try Now
+            </Button>
+          </Box>
         </Box>
       </Box>
 
@@ -168,3 +221,5 @@ export default function Home() {
     </Box>
   );
 }
+
+export default dynamic(() => Promise.resolve(Home), { ssr: false });

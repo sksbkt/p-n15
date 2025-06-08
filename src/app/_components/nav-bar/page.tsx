@@ -311,6 +311,12 @@ function NavBar() {
                   variant="contained"
                   sx={(theme) => ({
                     borderRadius: "20px",
+                    backgroundColor:
+                      mode === "light"
+                        ? isScrolled
+                          ? theme.palette.primary.main
+                          : "#2D3748"
+                        : theme.palette.primary.main,
                   })}
                 >
                   Sign Up
