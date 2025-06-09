@@ -310,6 +310,7 @@ function NavBar() {
                 <Button
                   variant="contained"
                   sx={(theme) => ({
+                    minWidth: "120px",
                     borderRadius: "20px",
                     backgroundColor:
                       mode === "light"

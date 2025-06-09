@@ -1,32 +1,34 @@
 "use client";
 import React, { useEffect, useRef } from "react";
-import { Box, Container } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import SliderComponent from "@/app/_components/silder.tsx/slider";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import dynamic from "next/dynamic";
+import { useThemeMode } from "@/hooks/useThemeHook";
 
 function Home() {
-  const projects = [
-    {
-      title: "NovaCRM",
-      description:
-        "A modern CRM platform to manage your clients and sales pipeline efficiently.",
-      image: "https://picsum.photos/800/300?random=11",
-    },
-    {
-      title: "TechBlog",
-      description:
-        "A feature-rich blogging platform for developers and tech enthusiasts.",
-      image: "https://picsum.photos/800/300?random=12",
-    },
-    {
-      title: "DevTracker",
-      description:
-        "Track your software development tasks and collaborate with your team seamlessly.",
-      image: "https://picsum.photos/800/300?random=13",
-    },
-  ];
+  const { mode } = useThemeMode();
+  // const projects = [
+  //   {
+  //     title: "NovaCRM",
+  //     description:
+  //       "A modern CRM platform to manage your clients and sales pipeline efficiently.",
+  //     image: "https://picsum.photos/800/300?random=11",
+  //   },
+  //   {
+  //     title: "TechBlog",
+  //     description:
+  //       "A feature-rich blogging platform for developers and tech enthusiasts.",
+  //     image: "https://picsum.photos/800/300?random=12",
+  //   },
+  //   {
+  //     title: "DevTracker",
+  //     description:
+  //       "Track your software development tasks and collaborate with your team seamlessly.",
+  //     image: "https://picsum.photos/800/300?random=13",
+  //   },
+  // ];
   const parallaxBoxRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     // let timeoutId: NodeJS.Timeout | null = null;
@@ -52,12 +54,13 @@ function Home() {
   }, []);
 
   return (
-    <Box>
+    <Box className="scroll-container ">
       {/* Parallax Section */}
-      {/* <Box
+      <Box
         ref={parallaxBoxRef}
         sx={{
-          height: { xs: "50vh", sm: "70vh", md: "80vh" },
+          // height: { xs: "50vh", sm: "70vh", md: "80vh" },
+          height: "100vh",
           width: "100%",
           backgroundImage:
             mode === "dark"
@@ -71,6 +74,8 @@ function Home() {
           alignItems: "center",
           justifyContent: "center",
           color: "#fff",
+          scrollSnapAlign: "start" /* Snap to the start edge of the item */,
+          scrollSnapStop: "always",
           transition: "opacity 0.3s ease-in-out",
         }}
       >
@@ -134,20 +139,51 @@ function Home() {
               variant="contained"
               color="primary"
               size="large"
-              sx={(theme) => ({
+              sx={{
                 borderRadius: "50px",
-              })}
+              }}
             >
               Try Now
             </Button>
           </Box>
         </Box>
-      </Box> */}
+      </Box>
 
       {/* Carousel Section */}
-      <Container maxWidth="md">
+      <Box
+        sx={{
+          py: 6,
+          ml: "auto",
+          mr: "auto",
+          alignSelf: "center",
+          maxWidth: { xs: "100%", md: "80%" },
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          scrollSnapAlign: "start" /* Snap to the start edge of the item */,
+          scrollSnapStop: "always",
+        }}
+      >
+        <Typography
+          sx={(theme) => ({
+            fontSize: { xs: "1.5rem", sm: "2rem", md: "2.5rem" },
+            fontWeight: 600,
+            alignSelf: "start",
+
+            [theme.breakpoints.down("md")]: {
+              alignSelf: "center",
+            },
+          })}
+          variant="h2"
+          fontWeight="bold"
+          gutterBottom
+        >
+          Our projects
+        </Typography>
         <SliderComponent />
-      </Container>
+      </Box>
 
       {/* Games Grid */}
       {/* <Container

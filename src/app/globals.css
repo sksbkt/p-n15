@@ -19,6 +19,14 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  scroll-snap-type: y mandatory;
+  /* Snap vertically, and snapping is required */
+  line-height: 1.5;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -28,41 +36,52 @@ body {
 .slider-inside-arrows {
   position: relative;
 }
+
 .slider-inside-arrows .slick-arrow {
   position: absolute;
   z-index: 2;
 }
+
 .slider-inside-arrows .slick-prev {
   left: 16px;
 }
+
 .slider-inside-arrows .slick-next {
   right: 16px;
 }
+
 .slick-prev:before {
   display: none;
 }
+
 .slick-next:before {
   display: none;
 }
+
 .slick-slide {
   filter: saturate(0.2);
   /* blur(2px); */
 }
+
 .slick-current {
   transition: filter 0.3s ease-in;
   filter: saturate(1.2);
 }
+
 .slick-dots .slick-active .custom-dot {
   background-color: #52bbe8 !important;
   opacity: 1;
 }
+
 .slick-track {
   height: inherit !important;
 }
+
 .slick-active {
   position: relative;
   z-index: 1;
 }
+
 li.slick-active::before {
   content: "";
   position: absolute;
@@ -78,6 +97,7 @@ li.slick-active::before {
   transition: all 0.3s ease-in-out;
   z-index: 3;
 }
+
 .slick-dots li {
   margin: 0px !important;
   height: 10px !important;
