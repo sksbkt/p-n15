@@ -169,6 +169,7 @@ const SliderComponent = () => {
                   display: "flex",
                   width: "100%",
                   flexDirection: "row",
+                  justifyContent: "space-between",
                   gap: 1,
                 }}
               >
@@ -217,20 +218,31 @@ const SliderComponent = () => {
                 >
                   <Tags
                     tags={[
-                      { text: "Next js", link: "https://nextjs.org/" },
-                      { text: "MUI", link: "https://mui.com/" },
+                      {
+                        text: "Next js",
+                        link: "https://nextjs.org/",
+                        icon: "nextjs",
+                      },
+                      { text: "MUI", link: "https://mui.com/", icon: "mui" },
                       {
                         text: "ReduxToolkit",
                         link: "https://redux-toolkit.js.org/",
+                        icon: "redux",
                       },
                       {
                         text: "TypeScript",
                         link: "https://www.typescriptlang.org/",
+                        icon: "typescript",
                       },
-                      { text: "React", link: "https://react.dev/" },
                       {
-                        text: "TypeScript",
-                        link: "https://www.typescriptlang.org/",
+                        text: "React",
+                        link: "https://react.dev/",
+                        icon: "react",
+                      },
+                      {
+                        text: "JavaScript",
+                        link: "https://www.javascript.com/",
+                        icon: "javascript",
                       },
                     ]}
                   />
