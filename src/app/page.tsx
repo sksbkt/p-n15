@@ -1,14 +1,12 @@
 "use client";
 import React, { useEffect, useRef } from "react";
-import { Box, Typography, Button, Container } from "@mui/material";
-import SliderComponent from "@/app/_components/slider";
+import { Box, Container } from "@mui/material";
+import SliderComponent from "@/app/_components/silder.tsx/slider";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useThemeMode } from "@/hooks/useThemeHook";
 import dynamic from "next/dynamic";
 
 function Home() {
-  const { mode } = useThemeMode();
   const projects = [
     {
       title: "NovaCRM",
@@ -147,10 +145,7 @@ function Home() {
       </Box> */}
 
       {/* Carousel Section */}
-      <Container
-        maxWidth="md"
-        sx={{ my: 6 }}
-      >
+      <Container maxWidth="md">
         <SliderComponent />
       </Container>
 

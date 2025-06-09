@@ -10,6 +10,7 @@ import React from "react";
 import Slider from "react-slick";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import Tags from "@/app/_components/silder.tsx/_components/tag";
 
 const SliderComponent = () => {
   const games = [
@@ -128,12 +129,12 @@ const SliderComponent = () => {
         nextArrow={<NextArrow />}
         prevArrow={<PrevArrow />}
       >
-        {games.map((game) => (
+        {games.map((game, index) => (
           // <Box
           //   key={game.title}
           //   sx={{ position: "relative" }}
           // >
-          <>
+          <Box key={index}>
             <CardMedia
               component="img"
               height="300"
@@ -153,7 +154,6 @@ const SliderComponent = () => {
                 p: { md: 3 },
                 [theme.breakpoints.down("md")]: {
                   display: "flex",
-                  height: "1.2rem",
                   alignItems: "center",
                   textAlign: "start",
                   position: "absolute",
@@ -164,33 +164,80 @@ const SliderComponent = () => {
                 },
               })}
             >
-              <Typography
-                variant="h6"
-                sx={(theme) => ({
-                  [theme.breakpoints.down("md")]: {
+              <Box
+                sx={{
+                  display: "flex",
+                  width: "100%",
+                  flexDirection: "row",
+                  gap: 1,
+                }}
+              >
+                <Box
+                  sx={{
                     display: "flex",
+                    flexDirection: "column",
+                    alignItems: "start",
+                    flexBasis: "60%",
+                  }}
+                >
+                  <Typography
+                    variant="h6"
+                    sx={(theme) => ({
+                      [theme.breakpoints.down("md")]: {
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      },
+                      fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
+                      fontWeight: 600,
+                    })}
+                  >
+                    {game.title}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={(theme) => ({
+                      [theme.breakpoints.down("md")]: {
+                        display: "none",
+                      },
+                      fontSize: { md: "1rem" },
+                    })}
+                  >
+                    {game.description}
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "start",
                     justifyContent: "center",
-                    alignItems: "center",
-                  },
-                  fontSize: { xs: "1rem", sm: "1.25rem", md: "1.5rem" },
-                  fontWeight: 600,
-                })}
-              >
-                {game.title}
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={(theme) => ({
-                  [theme.breakpoints.down("md")]: {
-                    display: "none",
-                  },
-                  fontSize: { md: "1rem" },
-                })}
-              >
-                {game.description}
-              </Typography>
+                    flexBasis: { md: "40%" },
+                  }}
+                >
+                  <Tags
+                    tags={[
+                      { text: "Next js", link: "https://nextjs.org/" },
+                      { text: "MUI", link: "https://mui.com/" },
+                      {
+                        text: "ReduxToolkit",
+                        link: "https://redux-toolkit.js.org/",
+                      },
+                      {
+                        text: "TypeScript",
+                        link: "https://www.typescriptlang.org/",
+                      },
+                      { text: "React", link: "https://react.dev/" },
+                      {
+                        text: "TypeScript",
+                        link: "https://www.typescriptlang.org/",
+                      },
+                    ]}
+                  />
+                </Box>
+              </Box>
             </CardContent>
-          </>
+          </Box>
         ))}
       </Slider>
     </Card>

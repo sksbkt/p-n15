@@ -45,7 +45,8 @@ body {
   display: none;
 }
 .slick-slide {
-  filter: saturate(0.2) blur(2px);
+  filter: saturate(0.2);
+  /* blur(2px); */
 }
 .slick-current {
   transition: filter 0.3s ease-in;
@@ -54,6 +55,9 @@ body {
 .slick-dots .slick-active .custom-dot {
   background-color: #52bbe8 !important;
   opacity: 1;
+}
+.slick-track {
+  height: inherit !important;
 }
 .slick-active {
   position: relative;
