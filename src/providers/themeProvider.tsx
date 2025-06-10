@@ -59,7 +59,7 @@ const ThemeContent = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {}, []);
   return (
     <>
-      <Box sx={{ height: isScrolled ? "60px" : "90px" }} />
+      {/* <Box sx={{ height: isScrolled ? "60px" : "90px" }} /> */}
 
       {children}
     </>

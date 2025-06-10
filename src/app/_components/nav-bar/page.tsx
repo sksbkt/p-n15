@@ -108,15 +108,23 @@ function NavBar() {
           position="fixed" // Keeps the AppBar fixed at the top
           sx={(theme) => ({
             // Conditional margin from the top of the window
-            mt: isScrolled ? "0px" : "10px",
+            // mt: isScrolled ? "0px" : "10px",
             // Conditional horizontal margin to remove space for rounded corners when scrolled
-            mx: isScrolled ? "0px" : "10px",
+            // mx: isScrolled ? "0px" : "10px",
             // Calculate width to account for horizontal margins
-            width: isScrolled ? "100%" : "calc(100% - 20px)",
+            // width: isScrolled ? "100%" : "calc(100% - 20px)",
+            width: "100%",
             // Apply rounded corners conditionally
-            borderRadius: isScrolled ? "0px" : "7px",
+            // borderRadius: isScrolled ? "0px" : "7px",
+            borderRadius: 0,
             // Ensure it's above other content
-            background: isScrolled ? "" : "transparent !important",
+            // background: isScrolled ? "" : "transparent !important",
+            backgroundColor:
+              mode === "light"
+                ? isScrolled
+                  ? theme.palette.text.primary
+                  : "rgba(255,255,255,0.8)"
+                : theme.palette.text.primary,
             zIndex: theme.zIndex.appBar + 1,
             boxShadow: "none !important",
           })}
@@ -188,6 +196,7 @@ function NavBar() {
                 <Box
                   sx={{
                     display: { xs: "flex", md: "none" },
+                    color: "red",
                   }}
                 >
                   <DrawerMenu
@@ -318,6 +327,7 @@ function NavBar() {
                           ? theme.palette.primary.main
                           : "#2D3748"
                         : theme.palette.primary.main,
+                    p: "3px",
                   })}
                 >
                   Sign Up

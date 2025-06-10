@@ -1,8 +1,17 @@
+"use client";
+import { useWindow } from "@/hooks/useWindow";
 import { Box, Grid } from "@mui/material";
 import React from "react";
 
-const layout = ({ children }: { children: React.ReactElement }) => {
-  return children;
+const Layout = ({ children }: { children: React.ReactElement }) => {
+  const { isScrolled } = useWindow();
+  return (
+    <>
+      <Box sx={{ height: isScrolled ? "60px" : "90px" }} />
+
+      {children}
+    </>
+  );
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid
@@ -17,4 +26,4 @@ const layout = ({ children }: { children: React.ReactElement }) => {
   );
 };
 
-export default layout;
+export default Layout;

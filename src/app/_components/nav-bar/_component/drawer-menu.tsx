@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   Box,
   Button,
@@ -6,6 +7,8 @@ import {
   IconButton,
   List,
   ListItem,
+  styled,
+  Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -13,6 +16,7 @@ import { MaterialUIDarkModeSwitch } from "@/app/_components/mui/darkmode-switch"
 import { useThemeMode } from "@/hooks/useThemeHook";
 import LanguageSelector from "@/app/_components/nav-bar/_component/language-selector";
 import Link from "next/link";
+import { useWindow } from "@/hooks/useWindow";
 type DrawerMenuProps = {
   menuItems: { text: string; link: string }[];
   anchor?: "left" | "right" | "top" | "bottom";
@@ -22,7 +26,22 @@ const DrawerMenu = ({ menuItems, anchor }: DrawerMenuProps) => {
   const handleToggleNavMenu = (val: boolean) => {
     setOpen(val);
   };
+
   const { mode, toggleThemeMode } = useThemeMode();
+  const { isScrolled } = useWindow();
+  type ExtraProps = {
+    component: React.ElementType;
+    href: string;
+  };
+  const BrandTypography = styled(Typography)<ExtraProps>(({ theme }) => ({
+    fontFamily: "monospace",
+    fontWeight: 700,
+    letterSpacing: ".1rem",
+    color: mode === "light" ? (isScrolled ? "inherit" : "#2D3748") : "inherit",
+    textDecoration: "none",
+    fontSize: isScrolled ? "1.2rem" : "1.5rem",
+    transition: "font-size 0.3s ease-in-out",
+  }));
   const DrawerList = (
     <Box
       sx={{
@@ -32,11 +51,30 @@ const DrawerMenu = ({ menuItems, anchor }: DrawerMenuProps) => {
         height: "100%",
       }}
     >
+      <Box sx={{ display: "flex", p: "10px 15px 0 15px" }}>
+        <BrandTypography
+          variant="h6"
+          noWrap
+          component="a"
+          href="/ss"
+        >
+          TechNova
+        </BrandTypography>
+        <Typography
+          sx={(theme) => ({
+            color: [theme.palette.primary.main],
+            fontSize: 24,
+            fontWeight: 800,
+          })}
+        >
+          /
+        </Typography>
+      </Box>
       <List>
         {menuItems.map(({ text, link }, index) => (
           <ListItem
             sx={{
-              padding: 2,
+              p: "10px 15px ",
               transition: "background-color 0.3s ease",
               "&:hover": {
                 backgroundColor: "rgba(0,0,0,0.1)",
@@ -129,7 +167,15 @@ const DrawerMenu = ({ menuItems, anchor }: DrawerMenuProps) => {
         aria-haspopup="true"
         onClick={() => handleToggleNavMenu(true)}
       >
-        <MenuIcon />
+        <MenuIcon
+          sx={{
+            color: isScrolled
+              ? mode === "light"
+                ? "#fff"
+                : "#fff"
+              : "divider",
+          }}
+        />
       </IconButton>
       <Drawer
         open={open}

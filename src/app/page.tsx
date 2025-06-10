@@ -54,12 +54,11 @@ function Home() {
   }, []);
 
   return (
-    <Box className="scroll-container ">
+    <Box>
       {/* Parallax Section */}
       <Box
         ref={parallaxBoxRef}
         sx={{
-          // height: { xs: "50vh", sm: "70vh", md: "80vh" },
           height: "100vh",
           width: "100%",
           backgroundImage:
@@ -74,6 +73,7 @@ function Home() {
           alignItems: "center",
           justifyContent: "center",
           color: "#fff",
+
           scrollSnapAlign: "start" /* Snap to the start edge of the item */,
           scrollSnapStop: "always",
           transition: "opacity 0.3s ease-in-out",
@@ -85,13 +85,11 @@ function Home() {
             display: "flex",
             flexDirection: "column",
             alignItems: "start",
-            gap: { xs: 1, md: 1, lg: 2 },
             background:
               "linear-gradient(-135deg, rgba(20,20,40,0.95) 0%, rgba(40,40,80,0.85) 100%)",
+            width: { xs: "90vw", sm: "80vw", md: "60vw" },
           }}
           p={4}
-          m={{ xs: 2, sm: 4, md: 6 }}
-          width={{ xs: "100%", sm: "80%", md: "60%" }}
           borderRadius={2}
         >
           <Typography
@@ -102,15 +100,28 @@ function Home() {
             sx={{
               fontSize: { xs: "1.8rem", sm: "2.5rem", md: "3rem" },
               fontWeight: "bold",
+              m: 0,
             }}
           >
-            TechNova Software Development Industry
+            TechNova Software
+          </Typography>
+          <Typography
+            variant="h5"
+            fontWeight="bold"
+            textAlign={"start"}
+            gutterBottom
+            sx={{
+              fontSize: { xs: "0.9rem", sm: "1.1rem", md: "1.3rem" },
+            }}
+          >
+            Development Industry
           </Typography>
           <Typography
             variant="body1"
             textAlign="start"
             gutterBottom
             sx={{
+              mt: 1,
               fontSize: { xs: "0.9rem", sm: "1rem", md: "1.2rem" },
             }}
           >
@@ -156,7 +167,7 @@ function Home() {
           ml: "auto",
           mr: "auto",
           alignSelf: "center",
-          maxWidth: { xs: "100%", md: "80%" },
+          width: { xs: "90vw", sm: "80vw", md: "60vw" },
           height: "100vh",
           display: "flex",
           flexDirection: "column",

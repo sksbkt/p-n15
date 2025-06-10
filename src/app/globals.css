@@ -58,6 +58,12 @@ body {
   display: none;
 }
 
+.slick-slider .slick-list {
+  width: 100% !important;
+  padding: 0 !important;
+}
+
+
 .slick-slide {
   filter: saturate(0.2);
   /* blur(2px); */
