@@ -1,11 +1,12 @@
 "use client";
-import React, { RefObject, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import SliderComponent from "@/app/_components/silder.tsx/slider";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import dynamic from "next/dynamic";
 import { useThemeMode } from "@/hooks/useThemeHook";
+import ExpertiseComponent from "@/app/_components/basic-card";
 
 function Home() {
   const { mode } = useThemeMode();
@@ -182,110 +183,16 @@ function Home() {
           objectFit: "cover",
         }}
       >
-        <Box
-          sx={{
-            position: "relative",
-            zIndex: 2,
-            background:
-              "linear-gradient(120deg, rgba(30,30,60,0.85) 60%, rgba(60,60,120,0.7) 100%)",
-            borderRadius: 3,
-            p: { xs: 3, md: 6 },
-            maxWidth: { xs: "90vw", md: "60vw" },
-            color: "#fff",
-            boxShadow: 3,
-            textAlign: "center",
-          }}
-        >
-          <Typography
-            variant="h4"
-            fontWeight="bold"
-            gutterBottom
-            sx={{ mb: 2 }}
-          >
-            Our Expertise
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{ fontSize: { xs: "1rem", md: "1.2rem" }, mb: 2 }}
-          >
-            We specialize in full-stack web development, cloud solutions, and
-            UI/UX design. Our team leverages the latest technologies to deliver
-            scalable, secure, and visually stunning applications for businesses
-            of all sizes.
-          </Typography>
-          <Box
-            sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              gap: 3,
-              mt: 2,
-            }}
-          >
-            <Box
-              sx={{
-                minWidth: 180,
-                p: 2,
-                background: "rgba(255,255,255,0.08)",
-                borderRadius: 2,
-              }}
-            >
-              <Typography
-                variant="h6"
-                fontWeight="bold"
-                gutterBottom
-              >
-                Web Development
-              </Typography>
-              <Typography variant="body2">
-                React, Next.js, Node.js, TypeScript
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                minWidth: 180,
-                p: 2,
-                background: "rgba(255,255,255,0.08)",
-                borderRadius: 2,
-              }}
-            >
-              <Typography
-                variant="h6"
-                fontWeight="bold"
-                gutterBottom
-              >
-                Cloud & DevOps
-              </Typography>
-              <Typography variant="body2">AWS, Azure, Docker, CI/CD</Typography>
-            </Box>
-            <Box
-              sx={{
-                minWidth: 180,
-                p: 2,
-                background: "rgba(255,255,255,0.08)",
-                borderRadius: 2,
-              }}
-            >
-              <Typography
-                variant="h6"
-                fontWeight="bold"
-                gutterBottom
-              >
-                UI/UX Design
-              </Typography>
-              <Typography variant="body2">
-                Figma, Material UI, Responsive Design
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
+        <ExpertiseComponent />
         {/* Optional: Overlay for parallax effect */}
         <Box
           sx={{
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(120deg, rgba(20,20,40,0.7) 60%, rgba(40,40,80,0.5) 100%)",
+              mode === "dark"
+                ? "linear-gradient(120deg, rgba(20,20,40,0.85) 60%, rgba(40,40,80,0.7) 100%)"
+                : "linear-gradient(120deg, rgba(255,255,255,1) 60%, rgba(230,230,255,0.5) 100%)",
             zIndex: 1,
           }}
         />
