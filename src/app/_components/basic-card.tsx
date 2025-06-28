@@ -8,21 +8,21 @@ const expertiseList = [
     subTitle: "React, Next.js, TypeScript, JavaScript",
     description:
       "Building performant, maintainable, and accessible user interfaces with React and Next.js. Experienced in SSR, SSG, and dynamic routing for modern web apps.",
-    icon: <CodeIcon />,
+    icon: CodeIcon,
   },
   {
     title: "UI/UX Implementation",
     subTitle: "MUI, Styled Components, Responsive Design",
     description:
       "Crafting pixel-perfect, responsive layouts and seamless user experiences. Skilled in design systems, theming, and cross-device compatibility.",
-    icon: <GridViewIcon />,
+    icon: GridViewIcon,
   },
   {
     title: "Frontend Architecture",
     subTitle: "State Management, Testing, Optimization",
     description:
       "Expertise in scalable state management (Redux, Context), component-driven development, automated testing, and performance optimization.",
-    icon: <ArchitectureIcon />,
+    icon: ArchitectureIcon,
   },
 ];
 const ExpertiseComponent = () => {
@@ -32,30 +32,71 @@ const ExpertiseComponent = () => {
       <Box
         sx={{
           position: "relative",
+          maxHeight: "80dvh",
           zIndex: 2,
           background:
             mode === "light"
-              ? "linear-gradient(120deg, rgb(102 102 125 / 98%) 60%, rgb(151 151 255 / 96%) 100%)"
-              : "linear-gradient(120deg, rgba(20,20,40,0.98) 60%, rgba(10,10,20,0.96) 100%)",
+              ? "linear-gradient(120deg, rgba(10,10,20,.7) 60%, rgb(151,151, 255 , .4) 100%)"
+              : "linear-gradient(120deg, rgba(20,20,40,0.7) 60%, rgba(10,10,20,0.5) 100%)",
           borderRadius: 3,
           p: { xs: 3, md: 6 },
           maxWidth: { xs: "90vw", md: "60vw" },
           color: "#fff",
-          boxShadow: 3,
+          boxShadow:
+            "0 8px 32px 0 rgba(31, 38, 135, 0.37), 0 2px 8px rgba(0,0,0,0.15)",
           textAlign: "center",
+          overflow: "auto",
+          // Custom scrollbars with no background
+          "&::-webkit-scrollbar": {
+            width: "8px",
+            background: "transparent",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "rgba(120,120,255,0.4)",
+            borderRadius: "8px",
+            minHeight: "40px",
+          },
+          "&::-webkit-scrollbar-track": {
+            background: "transparent",
+          },
+          scrollbarWidth: "thin",
+          scrollbarColor: "rgba(120,120,255,0.4) transparent",
+          // ? we use pseudo elements to create a blur effect and avoid getting the misaligned tooltip issue
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            inset: 0,
+            zIndex: 0,
+            borderRadius: 3,
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+            pointerEvents: "none",
+          },
         }}
       >
         <Typography
           variant="h4"
           fontWeight="bold"
           gutterBottom
-          sx={{ mb: 2 }}
+          sx={{
+            textAlign: "start",
+            fontSize: { sm: "1.7rem", md: "2rem" },
+            mb: 2,
+            position: "relative",
+            zIndex: 1,
+          }}
         >
           Our Expertise
         </Typography>
         <Typography
           variant="body1"
-          sx={{ fontSize: { xs: "1rem", md: "1.2rem" }, mb: 2 }}
+          sx={{
+            fontSize: { xs: "1rem", md: "1.2rem" },
+            mb: 2,
+            textAlign: "start",
+            position: "relative",
+            zIndex: 1,
+          }}
         >
           We specialize in full-stack web development, cloud solutions, and
           UI/UX design. Our team leverages the latest technologies to deliver
@@ -69,6 +110,8 @@ const ExpertiseComponent = () => {
             justifyContent: { xs: "center", md: "space-between" },
             gap: { xs: 1, md: 3 },
             mt: 2,
+            position: "relative",
+            zIndex: 1,
           }}
         >
           {expertiseList.map((card, idx) => (
@@ -91,10 +134,16 @@ type basicCardProps = {
   title: string;
   subTitle: string;
   description: string;
-  icon: React.ReactNode;
+  icon: React.ElementType;
 };
 import React, { useEffect, useRef } from "react";
-const BasicCard = ({ title, subTitle, description, icon }: basicCardProps) => {
+const BasicCard = ({
+  title,
+  subTitle,
+  description,
+  // jsx tags start with capital letter
+  icon: Icon,
+}: basicCardProps) => {
   const { mode } = useColorScheme();
   const tooltipRef = useRef<HTMLDivElement>(null);
   const [tooltipPos, setTooltipPos] = React.useState({ x: 0, y: 0 });
@@ -117,11 +166,13 @@ const BasicCard = ({ title, subTitle, description, icon }: basicCardProps) => {
         maxWidth: { xs: "100%", md: "350px" },
         p: "16px 20px",
         background:
-          mode === "light"
-            ? "linear-gradient(120deg, rgb(102 102 125 / 98%) 60%, rgb(151 151 255 / 96%) 100%)"
-            : "linear-gradient(120deg, rgb(40 40 60 / 98%) 60%, rgb(80 80 160 / 96%) 100%)",
+          mode === "dark"
+            ? "linear-gradient(120deg, rgba(80,80,160,0.2) 60%, rgba(151,151,255,0.3) 100%)"
+            : "linear-gradient(120deg, rgba(40,40,60,0.5) 60%, rgba(80,80,160,0.6) 100%)",
         borderRadius: 2,
-        border: `1px solid ${mode === "light" ? "#ccc" : "#555"}`,
+        border: `1px solid ${
+          mode === "light" ? "rgba(204,204,204,1)" : "rgba(85,85,85,1)"
+        }`,
         boxSizing: "border-box",
         display: "flex",
         flexDirection: "column",
@@ -157,10 +208,12 @@ const BasicCard = ({ title, subTitle, description, icon }: basicCardProps) => {
           zIndex: 10,
           background:
             mode === "light"
-              ? "linear-gradient(120deg, #fff 60%, #e3e3ff 100%)"
-              : "linear-gradient(120deg, #222 60%, #444 100%)",
-          color: mode === "light" ? "#222" : "#fff",
-          border: `1px solid ${mode === "light" ? "#ccc" : "#555"}`,
+              ? "linear-gradient(120deg, rgba(255,255,255,1) 60%, rgba(227,227,255,1) 100%)"
+              : "linear-gradient(120deg, rgba(34,34,34,1) 60%, rgba(68,68,68,1) 100%)",
+          color: mode === "light" ? "rgba(34,34,34,1)" : "rgba(255,255,255,1)",
+          border: `1px solid ${
+            mode === "light" ? "rgba(204,204,204,1)" : "rgba(85,85,85,1)"
+          }`,
           borderRadius: 2,
           px: 2,
           py: 1,
@@ -175,7 +228,8 @@ const BasicCard = ({ title, subTitle, description, icon }: basicCardProps) => {
         }}
         ref={tooltipRef}
       >
-        {icon}
+        {/* {icon} */}
+        <Icon />
         <span>{title}</span>
       </Box>
       <Box
@@ -216,7 +270,13 @@ const BasicCard = ({ title, subTitle, description, icon }: basicCardProps) => {
             height: "100%",
           }}
         >
-          {icon}
+          <Icon
+            sx={{
+              alignSelf: "start",
+              width: { xs: 32, md: 35 },
+              height: { xs: 32, md: 35 },
+            }}
+          />
         </Box>
       </Box>
       <Typography

@@ -192,7 +192,7 @@ function Home() {
             background:
               mode === "dark"
                 ? "linear-gradient(120deg, rgba(20,20,40,0.85) 60%, rgba(40,40,80,0.7) 100%)"
-                : "linear-gradient(120deg, rgba(255,255,255,1) 60%, rgba(230,230,255,0.5) 100%)",
+                : "linear-gradient(120deg, rgba(255,255,255,0.3) 60%, rgba(230,230,255,0.5) 100%)",
             zIndex: 1,
           }}
         />

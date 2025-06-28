@@ -20,7 +20,14 @@ export default function RootLayout({
       lang="en"
       suppressHydrationWarning
     >
-      <body suppressHydrationWarning>
+      <body
+        suppressHydrationWarning
+        style={{
+          scrollbarWidth: "thin",
+          scrollbarColor: "transparent transparent",
+          background: "transparent",
+        }}
+      >
         <AppRouterCacheProvider>
           <AppProvider>
             <NavBar />

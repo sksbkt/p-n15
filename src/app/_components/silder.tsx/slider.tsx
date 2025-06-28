@@ -12,8 +12,10 @@ import Slider from "react-slick";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Tags from "@/app/_components/silder.tsx/_components/tag";
+import { useThemeMode } from "@/hooks/useThemeHook";
 
 const SliderComponent = () => {
+  const { mode } = useThemeMode();
   const games = [
     {
       title: "Space Adventure",
@@ -138,6 +140,7 @@ const SliderComponent = () => {
             sx={{
               overflow: "hidden",
               position: "relative",
+              backgroundColor: "transparent",
             }}
           >
             <CardMedia
@@ -160,13 +163,18 @@ const SliderComponent = () => {
                 width: "100%",
                 p: { md: 3 },
                 background:
-                  "linear-gradient(180deg,rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.4) 34%, rgba(0, 0, 0, 0.4) 99%)",
+                  mode === "dark"
+                    ? "linear-gradient(180deg,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.6) 34%,rgba(0,0,0,0.85) 99%)"
+                    : "linear-gradient(180deg,rgba(255,255,255,0.05) 0%,rgba(255,255,255,0.4) 34%,rgba(255,255,255,0.7) 99%)",
                 backdropFilter: "blur(1px)",
-                color: "#fff",
+                color: mode === "dark" ? "#fff" : "#222",
                 [theme.breakpoints.up("md")]: {
                   position: "static",
-                  background: "none",
-                  color: "inherit",
+                  background:
+                    mode === "dark"
+                      ? "linear-gradient(180deg,rgba(0,0,0,0.25) 0%,rgba(0,0,0,0.6) 34%,rgba(0,0,0,0.85) 99%)"
+                      : "linear-gradient(180deg,rgba(255,255,255,0.05) 0%,rgba(255,255,255,0.4) 34%,rgba(255,255,255,0.7) 99%)",
+                  color: mode === "dark" ? "#fff" : "#222",
                   backdropFilter: "none",
                 },
                 [theme.breakpoints.down("md")]: {
