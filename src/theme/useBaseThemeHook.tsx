@@ -1,7 +1,8 @@
 import {
-  commonComponents,
+  // commonComponents, // Assuming commonComponents is available from "@/theme/palettes"
   getDesignToken,
-  typographyOptions,
+  typographyOptions, // Assuming typographyOptions is available from "@/theme/palettes"
+  commonComponents, // Uncommented based on usage below
 } from "@/theme/palettes";
 import { createTheme, PaletteMode, useColorScheme } from "@mui/material";
 import { useMemo } from "react";
@@ -12,11 +13,15 @@ export const useBaseTheme = () => {
   const theme = useMemo(
     () =>
       createTheme({
+        // Spread the palette object returned by getDesignToken directly here
+        // This ensures the main palette configuration is correctly applied
+        ...getDesignToken(mode as PaletteMode).palette,
         palette: {
-          mode: mode as PaletteMode,
-          ...getDesignToken(mode as PaletteMode),
+          mode: mode as PaletteMode, // Explicitly set the mode for the current palette
+          // The rest of the palette properties come from getDesignToken().palette
         },
         colorSchemes: {
+          // For colorSchemes, provide the full ColorSystemOptions for each mode
           light: getDesignToken("light"),
           dark: getDesignToken("dark"),
         },

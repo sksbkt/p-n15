@@ -62,7 +62,7 @@ function NavBar() {
     fontFamily: "monospace",
     fontWeight: 700,
     letterSpacing: ".1rem",
-    color: mode === "light" ? (isScrolled ? "inherit" : "#2D3748") : "inherit",
+    color: theme.vars?.palette.text.primary,
     textDecoration: "none",
     fontSize: isScrolled ? "1.2rem" : "1.5rem",
     transition: "font-size 0.3s ease-in-out",
@@ -119,15 +119,11 @@ function NavBar() {
             borderRadius: 0,
             // Ensure it's above other content
             // background: isScrolled ? "" : "transparent !important",
-            backgroundColor:
-              mode === "light"
-                ? isScrolled
-                  ? theme.palette.text.primary
-                  : "rgba(255,255,255,0.8)"
-                : theme.palette.text.primary,
+
             zIndex: theme.zIndex.appBar + 1,
             boxShadow: "none !important",
           })}
+          elevation={0}
         >
           <Toolbar
             sx={{
@@ -137,6 +133,12 @@ function NavBar() {
               "@media (min-width:800px)": {
                 minHeight: isScrolled ? "48px" : "64px", // Consistent height for larger screens
               },
+              background: "rgba(255, 255, 255, 0.1)", // Semi-transparent background
+              // mode === "light"
+              //   ? isScrolled
+              //     ? "rgba(45, 55, 72, 0.2)" // #2D3748 with 95% opacity
+              //     : "rgba(255,255,255,0.3)"
+              //   : "rgba(45, 55, 72, 0.4)", // #2D3748 with 95% opacity for dark mode too
               // Center content within the toolbar
               display: "flex",
               justifyContent: "space-between",
