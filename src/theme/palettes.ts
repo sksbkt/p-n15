@@ -1,10 +1,5 @@
 import { PaletteMode } from "@mui/material";
-// You might need to import ColorSystemOptions type if it's custom.
-// For Material-UI v5+, the return type for createTheme's palette options is typically ThemeOptions['palette'].
-// For `@mui/material`'s experimental `CssVarsProvider`, `colorSchemes` expects a structure similar to PaletteOptions.
-// Let's assume ColorSystemOptions is compatible with ThemeOptions['palette'] for simplicity.
-// If you are using Joy UI, ColorSystemOptions might refer to ColorSchemePalette or similar.
-// For `@mui/material`'s experimental CSS vars, the type is generally `PaletteOptions`.
+
 interface ColorSystemOptions {
   palette: {
     mode: PaletteMode;
@@ -44,7 +39,7 @@ const commonColors = {
     main: "#00BCD4", // Teal accent color, prominent in the image (e.g., logo, links)
     light: "#4DD0E1",
     dark: "#0097A7",
-    contrastText: "#FFFFFF", // White text on teal
+    contrastText: "#FFFFFF", // White text on Teal
   },
   secondary: {
     main: "#FFC107", // Amber for secondary actions/highlights, subtle in the image
@@ -52,6 +47,7 @@ const commonColors = {
     dark: "#FFA000",
     contrastText: "#212121", // Dark text on amber
   },
+
   error: {
     main: "#EF5350", // Red for errors
   },

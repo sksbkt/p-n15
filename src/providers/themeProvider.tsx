@@ -6,7 +6,6 @@ import { store } from "@/store";
 import { useBaseTheme } from "@/theme/useBaseThemeHook";
 import { Direction } from "@/types";
 import {
-  Box,
   CssBaseline,
   InitColorSchemeScript,
   ThemeProvider,
@@ -31,7 +30,7 @@ const ThemeContent = ({ children }: { children: React.ReactNode }) => {
     setMode(mode);
     handleDocumentDirection(direction);
   }, [mode, direction, setMode]);
-  const { isScrolled, setIsScrolled } = useWindow();
+  const { setIsScrolled } = useWindow();
   useEffect(() => {
     const handleScroll = () => {
       // Check if the scroll position is greater than a threshold (e.g., 50 pixels)
