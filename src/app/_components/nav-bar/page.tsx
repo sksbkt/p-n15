@@ -308,12 +308,7 @@ function NavBar() {
                   color="inherit"
                   sx={{
                     mr: 1,
-                    color:
-                      mode === "light"
-                        ? isScrolled
-                          ? "inherit"
-                          : "#2D3748"
-                        : "inherit",
+                    minWidth: "120px",
                   }}
                 >
                   Login
@@ -323,12 +318,7 @@ function NavBar() {
                   sx={(theme) => ({
                     minWidth: "120px",
                     borderRadius: "20px",
-                    backgroundColor:
-                      mode === "light"
-                        ? isScrolled
-                          ? theme.palette.primary.main
-                          : "#2D3748"
-                        : theme.palette.primary.main,
+
                     p: "3px",
                   })}
                 >
