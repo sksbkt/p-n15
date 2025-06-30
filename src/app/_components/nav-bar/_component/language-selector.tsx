@@ -34,23 +34,13 @@ const LanguageSelector = () => {
           key={"En"}
           value={"En"}
         >
-          <Typography
-            color="primary"
-            variant="button"
-          >
-            English
-          </Typography>
+          <Typography variant="button">English</Typography>
         </MenuItem>
         <MenuItem
           key={"Fa"}
           value={"Fa"}
         >
-          <Typography
-            color="primary"
-            variant="button"
-          >
-            Farsi
-          </Typography>
+          <Typography variant="button">Farsi</Typography>
         </MenuItem>
       </Select>
     </>

@@ -1,15 +1,14 @@
 "use client";
 import React, { useEffect, useRef } from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, useColorScheme } from "@mui/material";
 import SliderComponent from "@/app/_components/silder.tsx/slider";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import dynamic from "next/dynamic";
-import { useThemeMode } from "@/hooks/useThemeHook";
 import ExpertiseComponent from "@/app/_components/basic-card";
 
 function Home() {
-  const { mode } = useThemeMode();
+  const { mode } = useColorScheme();
   // const projects = [
   //   {
   //     title: "NovaCRM",

@@ -9,60 +9,47 @@ import {
   CssBaseline,
   InitColorSchemeScript,
   ThemeProvider,
-  useColorScheme,
+  Experimental_CssVarsProvider as CssVarsProvider,
 } from "@mui/material";
-import { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Provider } from "react-redux";
 
 const ThemeContent = ({ children }: { children: React.ReactNode }) => {
   const { theme } = useBaseTheme();
-  const { direction, mode } = useThemeMode();
-  const { setMode } = useColorScheme();
+  const { direction } = useThemeMode();
 
-  const handleDocumentDirection = (direction: Direction) => {
-    document.documentElement.setAttribute("dir", direction);
-    // ? still figuring out whether its the best way to change theme direction dynamically or not
-    // * WIP
-    theme.direction = direction;
-  };
-
+  const handleDocumentDirection = useCallback(
+    (direction: Direction) => {
+      document.documentElement.setAttribute("dir", direction);
+      // ? still figuring out whether its the best way to change theme direction dynamically or not
+      // * WIP
+      theme.direction = direction;
+    },
+    [theme]
+  );
+  // ! conflict with useColorScheme
   useEffect(() => {
-    setMode(mode);
     handleDocumentDirection(direction);
-  }, [mode, direction, setMode]);
+  }, [direction, handleDocumentDirection]);
   const { setIsScrolled } = useWindow();
   useEffect(() => {
     const handleScroll = () => {
-      // Check if the scroll position is greater than a threshold (e.g., 50 pixels)
       if (window.scrollY > 50) {
-        // dispatch(setIsScrolled(true));
         setIsScrolled(true);
-
-        // setIsScrolled(true);
       } else {
         setIsScrolled(false);
-        // dispatch(setIsScrolled(false));
-        // setIsScrolled(false);
       }
     };
     handleScroll();
-    // Add the scroll event listener when the component mounts
     window.addEventListener("scroll", handleScroll);
 
-    // Clean up the event listener when the component unmounts
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [setIsScrolled]);
 
   useEffect(() => {}, []);
-  return (
-    <>
-      {/* <Box sx={{ height: isScrolled ? "60px" : "90px" }} /> */}
-
-      {children}
-    </>
-  );
+  return <>{children}</>;
 };
 
 const ThemeProviderWrapper = ({ children }: { children: React.ReactNode }) => {
@@ -74,10 +61,12 @@ const ThemeProviderWrapper = ({ children }: { children: React.ReactNode }) => {
         attribute="class"
         defaultMode="system"
       />
-      <ThemeProvider theme={theme}>
+      {/* <ThemeProvider theme={theme}> */}
+      <CssVarsProvider theme={theme}>
         <CssBaseline enableColorScheme />
         <ThemeContent>{children}</ThemeContent>
-      </ThemeProvider>
+      </CssVarsProvider>
+      {/* </ThemeProvider> */}
     </Provider>
   );
 };

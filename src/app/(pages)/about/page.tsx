@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   Container,
@@ -10,6 +11,7 @@ import {
   CardContent,
   CardHeader,
   Divider,
+  useColorScheme,
 } from "@mui/material";
 
 // Example data for key persons
@@ -40,10 +42,7 @@ const AboutPage = () => {
       maxWidth="md"
       sx={{ mt: 8, mb: 8 }}
     >
-      <Paper
-        elevation={3}
-        sx={{ p: 4 }}
-      >
+      <Paper sx={{ p: 4 }}>
         <Box
           display="flex"
           flexDirection="column"

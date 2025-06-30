@@ -9,12 +9,12 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 // import { useDispatch } from "react-redux";
 import { useThemeMode } from "@/hooks/useThemeHook";
 
 import { useWindow } from "@/hooks/useWindow";
-import { styled } from "@mui/material/styles";
+import { styled, useColorScheme } from "@mui/material/styles";
 import { MaterialUIDarkModeSwitch } from "@/app/_components/mui/darkmode-switch";
 import DrawerMenu from "@/app/_components/nav-bar/_component/drawer-menu";
 import LanguageSelector from "@/app/_components/nav-bar/_component/language-selector";
@@ -23,14 +23,12 @@ import { usePathname } from "next/navigation";
 function NavBar() {
   const pathName = usePathname();
   const [mounted, setMounted] = React.useState(false);
-  const { toggleThemeMode, direction, mode } = useThemeMode();
+  const { mode, setMode } = useColorScheme();
+  const { direction } = useThemeMode();
   React.useEffect(() => {
     setMounted(true);
   }, []);
 
-  // State to track if the page has been scrolled
-  // const [isScrolled, setIsScrolled] = useState(false);
-  // State for the mobile menu anchor element
   const [anchorElNav, setAnchorElNav] = useState<HTMLElement | null>(null);
 
   const { isScrolled } = useWindow();
@@ -53,7 +51,9 @@ function NavBar() {
   ];
 
   if (!mounted) return null;
-
+  const toggleThemeMode = () => {
+    setMode(mode === "dark" ? "light" : "dark");
+  };
   type ExtraProps = {
     component: React.ElementType;
     href: string;
@@ -70,8 +70,8 @@ function NavBar() {
   const MenuTypographyDesktop = styled(Typography)(({ theme }) => ({
     color:
       theme.palette.mode === "dark"
-        ? theme.palette.primary.main
-        : theme.palette.primary.main,
+        ? theme.vars?.palette.primary.dark
+        : theme.vars?.palette.primary.dark,
     fontWeight: 600,
     letterSpacing: "0.08em",
     marginLeft: theme.spacing(1),
@@ -105,21 +105,12 @@ function NavBar() {
         spacing={{ xs: 2, lg: 6 }}
       >
         <AppBar
-          position="fixed" // Keeps the AppBar fixed at the top
+          position="fixed"
+          color="transparent"
           sx={(theme) => ({
-            // Conditional margin from the top of the window
-            // mt: isScrolled ? "0px" : "10px",
-            // Conditional horizontal margin to remove space for rounded corners when scrolled
-            // mx: isScrolled ? "0px" : "10px",
-            // Calculate width to account for horizontal margins
-            // width: isScrolled ? "100%" : "calc(100% - 20px)",
             width: "100%",
-            // Apply rounded corners conditionally
-            // borderRadius: isScrolled ? "0px" : "7px",
             borderRadius: 0,
-            // Ensure it's above other content
-            // background: isScrolled ? "" : "transparent !important",
-
+            background: theme.vars?.palette.action.hover,
             zIndex: theme.zIndex.appBar + 1,
             boxShadow: "none !important",
           })}
@@ -127,19 +118,15 @@ function NavBar() {
         >
           <Toolbar
             sx={{
-              // Conditional padding for the toolbar to make it smaller on scroll
-              maxHeight: isScrolled ? "28px" : "64px", // Smaller height when scrolled
-              padding: isScrolled ? "0 16px" : "0 24px", // Smaller padding when scrolled
+              maxHeight: isScrolled ? "28px" : "64px",
+              padding: isScrolled ? "0 16px" : "0 24px",
               "@media (min-width:800px)": {
-                minHeight: isScrolled ? "48px" : "64px", // Consistent height for larger screens
+                minHeight: isScrolled ? "48px" : "64px",
               },
-              background: "rgba(255, 255, 255, 0.1)", // Semi-transparent background
-              // mode === "light"
-              //   ? isScrolled
-              //     ? "rgba(45, 55, 72, 0.2)" // #2D3748 with 95% opacity
-              //     : "rgba(255,255,255,0.3)"
-              //   : "rgba(45, 55, 72, 0.4)", // #2D3748 with 95% opacity for dark mode too
-              // Center content within the toolbar
+              // backgroundColor: isScrolled
+              //   ? "rgba(255, 255, 255, 0.4)"
+              //   : "rgba(255, 255, 255, 0.2)",
+              backdropFilter: "blur(10px)",
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
