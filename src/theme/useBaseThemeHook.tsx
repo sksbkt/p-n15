@@ -1,5 +1,5 @@
 import { darkColorSystemOptions, lightColorSystemOptions } from "@/theme/theme";
-import { createTheme, PaletteMode, useColorScheme } from "@mui/material";
+import { createTheme, useColorScheme } from "@mui/material";
 import { useMemo } from "react";
 
 export const useBaseTheme = () => {
@@ -7,8 +7,10 @@ export const useBaseTheme = () => {
   const theme = useMemo(() => {
     return createTheme({
       palette: {
-        mode: mode as PaletteMode,
-        ...(mode === "dark" ? darkColorSystemOptions : lightColorSystemOptions),
+        mode: mode as "light" | "dark",
+        ...(mode === "dark"
+          ? darkColorSystemOptions.palette
+          : lightColorSystemOptions.palette),
       },
       colorSchemes: {
         light: lightColorSystemOptions,
@@ -74,6 +76,6 @@ export const useBaseTheme = () => {
         },
       },
     });
-  }, [mode]);
+  }, []);
   return { theme };
 };

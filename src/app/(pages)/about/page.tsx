@@ -11,7 +11,6 @@ import {
   CardContent,
   CardHeader,
   Divider,
-  useColorScheme,
 } from "@mui/material";
 
 // Example data for key persons

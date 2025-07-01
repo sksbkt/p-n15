@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 import {
+  alpha,
   AppBar,
   Box,
   Button,
@@ -110,7 +111,7 @@ function NavBar() {
           sx={(theme) => ({
             width: "100%",
             borderRadius: 0,
-            background: theme.vars?.palette.action.hover,
+
             zIndex: theme.zIndex.appBar + 1,
             boxShadow: "none !important",
           })}
